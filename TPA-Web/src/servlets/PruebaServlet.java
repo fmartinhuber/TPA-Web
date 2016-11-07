@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controler.DepositoControlador;
 import dto.ArticuloDTO;
 //import bean.ArticuloBean;
 import interfaz.ArticuloEJBLocal;
@@ -26,7 +27,7 @@ public class PruebaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	@EJB
-	ArticuloEJB ejb;
+	DepositoControlador controlador;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,7 +51,7 @@ public class PruebaServlet extends HttpServlet {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		List asd = ejb.listarArticulos();
+		List asd = controlador.listarArticulos();
 		System.out.println(asd.toString());
 		for (Iterator iterator = asd.iterator(); iterator.hasNext();) {
 			ArticuloDTO object = (ArticuloDTO) iterator.next();
