@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import controler.DepositoControlador;
 import dto.ArticuloDTO;
+import dto.SolicitudArticuloDTO;
 //import bean.ArticuloBean;
+import serviceREST.SolicitudCompraFabricaClient;
 
 /**
  * Servlet implementation class PruebaServlet
@@ -49,13 +51,9 @@ public class PruebaServlet extends HttpServlet {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		List asd = controlador.listarArticulos();
-		System.out.println(asd.toString());
-		for (Iterator iterator = asd.iterator(); iterator.hasNext();) {
-			ArticuloDTO object = (ArticuloDTO) iterator.next();
-			response.getWriter().append(object.toString());
-			
-		}
+		List <SolicitudArticuloDTO> solicitudesArticulo = controlador.obtenerSolicitudArticuloPendiente();
+		SolicitudCompraFabricaClient.conexion(solicitudesArticulo);
+		
 	}
 
 	/**

@@ -5,17 +5,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <dependencies>
-    <dependency>
-      <groupId>TPA-ServerClient</groupId>
-      <artifactId>TPA-ServerClient</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>TPA-Server</groupId>
-      <artifactId>TPA-Server</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <type>ejb</type>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 	<dependency>
 	    <groupId>com.google.code.gson</groupId>

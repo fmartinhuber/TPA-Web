@@ -18,7 +18,7 @@ import javax.jms.TextMessage;
 						propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 		}, 
 		mappedName = "java:/jms/queue/testQueue")
-public class ReceptorDepositoMessage implements MessageListener {
+	public class ReceptorDepositoMessage implements MessageListener {
 
 	/**
 	 * Default constructor. 
