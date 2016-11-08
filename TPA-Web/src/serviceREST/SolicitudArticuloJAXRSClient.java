@@ -8,6 +8,7 @@ public class SolicitudArticuloJAXRSClient {
 		
 		URL url = new URL("http://localhost:8080/TPA-WEB/rest/service/PEPE");
 		
+		//https://www.adictosaltrabajo.com/tutoriales/gson-java-json/
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		
 		if (urlConnection.getResponseCode() != 200) {
