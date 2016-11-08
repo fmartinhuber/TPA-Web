@@ -3,10 +3,10 @@ package serviceREST;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class JAXRSClient {
+public class SolicitudArticuloJAXRSClient {
 	public static void main(String[] args) throws Exception {
 		
-		URL url = new URL("http://localhost:8080/TPA-WEB/rest/service/ACAVIENEUNJSAON DELACOCNALHACA");
+		URL url = new URL("http://localhost:8080/TPA-WEB/rest/service/PEPE");
 		
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		

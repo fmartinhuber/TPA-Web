@@ -30,6 +30,8 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			//Parametros: Codigo;Fecha
 			String solicitudesHardcore = "G12JO5I1;?24/08/2016-??G12I95TA;?11/09/2016-??G129IT15;?17/10/2016";
 			response.getWriter().write(solicitudesHardcore);
+			
+			
 		}
 		
 		

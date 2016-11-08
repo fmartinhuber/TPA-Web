@@ -4,16 +4,24 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.*;
 
+import javax.ejb.EJB;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controler.DepositoControlador;
+import dto.ArticuloDTO;
+import serviceREST.CrearArticuloJAXRSClient;
+
 
 @WebServlet("/CrearArticuloServlet")
 public class CrearArticuloServlet extends HttpServlet {
 
+	@EJB
+	DepositoControlador deposito;
+	
 	private static final long serialVersionUID = 1L;
 
 	public CrearArticuloServlet() {
@@ -35,9 +43,12 @@ public class CrearArticuloServlet extends HttpServlet {
 			if (request.getParameter("metodo").equalsIgnoreCase("crearArticulo")) {
 				crearArticulo(request, response);
 			} else if (request.getParameter("metodo").equalsIgnoreCase("nuevoMetodo")) {
-
+				//HACE TU LOGICA
+				
+				
 			}
-
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,6 +57,12 @@ public class CrearArticuloServlet extends HttpServlet {
 
 	private void crearArticulo(HttpServletRequest request, HttpServletResponse response) throws NotBoundException, IOException {
 
+		ArticuloDTO articuloDto = new ArticuloDTO();
+		//TODOS LOS SETTERS
+		deposito.crearArticulo(articuloDto);
+		
+		
+		CrearArticuloJAXRSClient.conexion(articuloDto);
 		// Cantidad Disponible, Codigo, Descripcion, Fecha, Foto, Marca, Nombre, Origen, Precio 
 		// Electrodomestico: ficha tecnica
 		// Muebles: material

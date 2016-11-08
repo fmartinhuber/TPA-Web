@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import controler.DepositoControlador;
 import dto.ArticuloDTO;
 //import bean.ArticuloBean;
-import interfaz.ArticuloEJBLocal;
-import negocio.ArticuloEJB;
 
 /**
  * Servlet implementation class PruebaServlet
