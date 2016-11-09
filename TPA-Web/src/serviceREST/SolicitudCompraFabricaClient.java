@@ -6,6 +6,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import dto.SolicitudArticuloDTO;
 
 public class SolicitudCompraFabricaClient {
@@ -13,10 +16,11 @@ public class SolicitudCompraFabricaClient {
 	public static void conexion(List <SolicitudArticuloDTO> articuloDTOs){
 		
 		try {
-			String URL = "http://localhost:8080/TPA-WEB/rest/service/";
-			String JSON = "";
-			
+			String URL = "http://localhost:8080/TPA-WEB/rest/service/solicitudCompra";
+			Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+			String JSON = prettyGson.toJson(articuloDTOs);
 			URL url;
+			System.out.println("URL: " + URL + JSON);
 			url = new URL(URL + JSON);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			

@@ -10,13 +10,13 @@ import serviceMessages.ProductorFabricaMessage;
 @Path("/service")
 public class SolicitudCompraFabricaApp {
 
-	@GET @Path("/prueba") @Produces({ "text/plain" })
-	public String hola() {
+	@GET @Path("/solicitudCompra") @Produces({ "text/plain" })
+	public String solicitudCompra(String json) {
 		
-		SolicitudArticuloDTO solicitudArticulo = null; 
-		ProductorFabricaMessage asd = new ProductorFabricaMessage();
-		asd.sendMessage(solicitudArticulo);
-		return "prueba!";
+//		SolicitudArticuloDTO solicitudArticulo = null; 
+//		ProductorFabricaMessage asd = new ProductorFabricaMessage();
+//		asd.sendMessage(solicitudArticulo);
+		return json;
 	}
 	
 }
