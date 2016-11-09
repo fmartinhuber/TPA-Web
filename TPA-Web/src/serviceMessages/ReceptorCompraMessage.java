@@ -10,7 +10,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import controler.DepositoControlador;
+import controler.IDepositoControladorLocal;
 import dto.SolicitudCompraDTO;
 
 /**
@@ -25,7 +25,7 @@ import dto.SolicitudCompraDTO;
 public class ReceptorCompraMessage implements MessageListener {
 
 	@EJB
-	DepositoControlador ejb;
+	IDepositoControladorLocal ejb;
     /**
      * Default constructor. 
      */
