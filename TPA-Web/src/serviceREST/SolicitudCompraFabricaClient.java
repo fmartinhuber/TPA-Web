@@ -4,26 +4,47 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+import org.apache.commons.io.IOUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import dto.SolicitudArticuloDTO;
 
 public class SolicitudCompraFabricaClient {
 
+	
+	@GET
+    @Path("ping")
+    public String getServerTime() {
+        System.out.println("RESTful Service 'MessageService' is running ==> ping");
+        return "received ping on "+new Date().toString();
+    }
+	
 	public static void conexion(List <SolicitudArticuloDTO> articuloDTOs){
 		
 		try {
 			String URL = "http://localhost:8080/TPA-WEB/rest/service/solicitudCompra";
-			Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+			Gson prettyGson = new GsonBuilder().serializeNulls().create();
+			JsonObject JsonObject = new JsonObject();
+			JsonObject.addProperty("codigo", articuloDTOs.get(0).getCodigo());
+			JsonObject.addProperty("estado", articuloDTOs.get(0).getEstado());
+			System.out.println("JsonObject: " + JsonObject.toString());
 			String JSON = prettyGson.toJson(articuloDTOs);
+			System.out.println("JSON: " + JSON.toString());
 			URL url;
 			System.out.println("URL: " + URL + JSON);
 			url = new URL(URL + JSON);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//			IOUtils.write("{\"id\" : \"1759\" , \"nombre\" : \"John Doe\" }", url.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
 				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
 			}
