@@ -43,6 +43,7 @@ public class SolicitudCompraFabricaClient {
 			System.out.println("URL: " + URL + JSON);
 			url = new URL(URL + JSON);
 			
+			
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 //			IOUtils.write("{\"id\" : \"1759\" , \"nombre\" : \"John Doe\" }", url.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
