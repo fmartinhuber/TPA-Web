@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controler.DepositoControlador;
+import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
 import dto.SolicitudArticuloDTO;
 //import bean.ArticuloBean;
@@ -27,7 +27,7 @@ public class PruebaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	@EJB
-	DepositoControlador controlador;
+	IDepositoControladorLocal controlador;
     /**
      * @see HttpServlet#HttpServlet()
      */

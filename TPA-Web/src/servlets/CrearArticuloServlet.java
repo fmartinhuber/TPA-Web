@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controler.DepositoControlador;
+import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
 import serviceREST.CrearArticuloJAXRSClient;
 
@@ -20,7 +20,7 @@ import serviceREST.CrearArticuloJAXRSClient;
 public class CrearArticuloServlet extends HttpServlet {
 
 	@EJB
-	DepositoControlador deposito;
+	IDepositoControladorLocal deposito;
 	
 	private static final long serialVersionUID = 1L;
 
