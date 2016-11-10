@@ -10,7 +10,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import controler.DepositoControlador;
+import controler.IDepositoControladorLocal;
 import dto.SolicitudArticuloDTO;
 
 /**
@@ -25,7 +25,7 @@ import dto.SolicitudArticuloDTO;
 public class ReceptorSolicitudArticuloMessage implements MessageListener {
 
 	@EJB
-	DepositoControlador deposito;
+	IDepositoControladorLocal deposito;
     /**
      * Default constructor. 
      */
