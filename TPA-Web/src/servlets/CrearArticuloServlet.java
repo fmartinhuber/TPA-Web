@@ -42,12 +42,8 @@ public class CrearArticuloServlet extends HttpServlet {
 		try {
 			if (request.getParameter("metodo").equalsIgnoreCase("crearArticulo")) {
 				crearArticulo(request, response);
-			} else if (request.getParameter("metodo").equalsIgnoreCase("nuevoMetodo")) {
-				//HACE TU LOGICA
-				
-				
-			}
-			
+			} else if (request.getParameter("metodo").equalsIgnoreCase("nuevoMetodo")) {					
+				}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,12 +53,46 @@ public class CrearArticuloServlet extends HttpServlet {
 
 	private void crearArticulo(HttpServletRequest request, HttpServletResponse response) throws NotBoundException, IOException {
 
-		ArticuloDTO articuloDto = new ArticuloDTO();
-		//TODOS LOS SETTERS
-		deposito.crearArticulo(articuloDto);
+		ArticuloDTO newArticulo = new ArticuloDTO();
+		
+		Calendar cal01 = GregorianCalendar.getInstance(); 	
+		cal01.add(Calendar.DAY_OF_YEAR, -1);	
+		Date day01 = cal01.getTime();	
+		cal01.add(Calendar.MONTH, 1); 		
+		
+		//newArticulo.setId(ArticuloDao.getInstancia().obtenerMaximoIdArticulo());	
+		newArticulo.setIdDeposito(request.getParameter("deposito"));
+		newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
+		newArticulo.setDescripcion(request.getParameter("descripcion"));
+		newArticulo.setFecha(day01);
+		newArticulo.setFoto(request.getParameter("foto"));
+		newArticulo.setMarca(request.getParameter("marca"));
+		newArticulo.setNombre(request.getParameter("nombre"));
+		newArticulo.setOrigen(request.getParameter("origen"));
+		newArticulo.setPrecio(Float.valueOf(request.getParameter("precio")));		
+		newArticulo.setCantidadDisponible(0);
+		newArticulo.setTipo(request.getParameter("tipo"));
+		
+		newArticulo.setFichaTecnica(request.getParameter("fichaTecnica"));
+		newArticulo.setMaterial(request.getParameter("material"));
+		newArticulo.setEdadRecomendada(request.getParameter("edad"));
+		newArticulo.setColor(request.getParameter("color"));
+		newArticulo.setTalle(request.getParameter("talle"));
 		
 		
-		CrearArticuloJAXRSClient.conexion(articuloDto);
+		deposito.crearArticulo(newArticulo);
+		
+		response.getWriter().print("<h1> Se creó el artículo de tipo " +newArticulo.getTipo()+"<h1>");
+		
+		response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");		
+		
+		
+		
+		// Enviarlo por REST
+		//CrearArticuloJAXRSClient.conexion(articuloDto);
+		
+		
+		
 		// Cantidad Disponible, Codigo, Descripcion, Fecha, Foto, Marca, Nombre, Origen, Precio 
 		// Electrodomestico: ficha tecnica
 		// Muebles: material

@@ -1,12 +1,9 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.ejb.EJB;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +15,7 @@ import dto.ArticuloDTO;
 import dto.SolicitudArticuloDTO;
 import dto.SolicitudCompraDTO;
 //import bean.ArticuloBean;
+import dto.*;
 import serviceREST.SolicitudCompraFabricaClient;
 
 /**
