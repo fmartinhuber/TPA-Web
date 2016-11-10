@@ -47,6 +47,7 @@ public class ReceptorCompraMessage implements MessageListener {
 				SolicitudCompraDTO solCompraDTO = (SolicitudCompraDTO) message;
 				ejb.crearRecepcionCompra(solCompraDTO);
 			}
+			
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e);
 		}
