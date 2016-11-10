@@ -20,6 +20,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import dto.SolicitudArticuloDTO;
+import dto.SolicitudCompraDTO;
 
 public class SolicitudCompraFabricaClient {
 
@@ -31,7 +32,7 @@ public class SolicitudCompraFabricaClient {
         return "received ping on "+new Date().toString();
     }
 	
-	public static void conexion(List <SolicitudArticuloDTO> articuloDTOs){
+	public static void conexion(SolicitudCompraDTO articuloDTOs){
 		
 		try {
 			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/solicitudCompra?solicitud=";

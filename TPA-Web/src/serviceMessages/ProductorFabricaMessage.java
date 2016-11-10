@@ -10,6 +10,7 @@ import javax.jms.Queue;
 import javax.jms.TextMessage;
 
 import dto.SolicitudArticuloDTO;
+import dto.SolicitudCompraDTO;
 
 @Stateless
 public class ProductorFabricaMessage {
@@ -23,7 +24,7 @@ public class ProductorFabricaMessage {
 	@JMSConnectionFactory("java:jboss/DefaultJMSConnectionFactory")
 	private JMSContext context;
 
-	public void sendMessage(SolicitudArticuloDTO solicitudArticulo) {
+	public void sendMessage(SolicitudCompraDTO solicitudArticulo) {
 //		JMSContext c = new ActiveMQXAJMSContext(,context); 
 		ObjectMessage  message = context.createObjectMessage(solicitudArticulo);
 		context.createProducer().send(testQueue, message);

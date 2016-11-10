@@ -15,7 +15,7 @@ import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 
 import dto.SolicitudArticuloDTO;
-import serviceMessages.ProductorDepositoMessage;
+import dto.SolicitudCompraDTO;
 import serviceMessages.ProductorFabricaMessage;
 
 @Path("/service")
@@ -38,8 +38,8 @@ public class SolicitudCompraFabricaApp {
 			Gson gson = new Gson ();
 			System.out.println("json: " + json.toString());
 			System.out.println("decoded: " + decodedValue1.toString());
-			SolicitudArticuloDTO[] solicitudArticulo = gson.fromJson(json, SolicitudArticuloDTO[].class);
-			producer.sendMessage(solicitudArticulo[0]);
+			SolicitudCompraDTO solicitudArticulo = gson.fromJson(json, SolicitudCompraDTO.class);
+			producer.sendMessage(solicitudArticulo);
 			return json;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
