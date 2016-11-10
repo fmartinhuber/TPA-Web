@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controler.*;
+import dto.ArticuloDTO;
 
 @WebServlet("/ModificarArticuloServlet")
 public class ModificarArticuloServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	@EJB
+	IDepositoControladorLocal deposito;
 
 	public ModificarArticuloServlet() {
 
@@ -47,6 +52,18 @@ public class ModificarArticuloServlet extends HttpServlet {
 	
 	private void modificarArticulo(HttpServletRequest request, HttpServletResponse response) throws NotBoundException, IOException {
 
+		ArticuloDTO newArticulo = new ArticuloDTO();
+		
+		newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
+		newArticulo.setCantidadDisponible(Integer.valueOf(request.getParameter("cantidad")));
+		
+		deposito.modificarArticulo(newArticulo);
+		
+		response.getWriter().print("<h1> Se modificó el stock del artículo<h1>");				
+		response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");
+		
+		
+		
 //		ArticuloBean newArticulo = new ArticuloBean();
 //		
 //		newArticulo.setCodigo(Integer.valueOf(request.getParameter("codigo")));
