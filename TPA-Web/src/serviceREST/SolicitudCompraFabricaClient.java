@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
@@ -31,17 +34,18 @@ public class SolicitudCompraFabricaClient {
 	public static void conexion(List <SolicitudArticuloDTO> articuloDTOs){
 		
 		try {
-			String URL = "http://localhost:8080/TPA-WEB/rest/service/solicitudCompra";
+			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/solicitudCompra?solicitud=";
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();
-			JsonObject JsonObject = new JsonObject();
-			JsonObject.addProperty("codigo", articuloDTOs.get(0).getCodigo());
-			JsonObject.addProperty("estado", articuloDTOs.get(0).getEstado());
-			System.out.println("JsonObject: " + JsonObject.toString());
+//			JsonObject JsonObject = new JsonObject();
+//			JsonObject.addProperty("codigo", articuloDTOs.get(0).getCodigo());
+//			JsonObject.addProperty("estado", articuloDTOs.get(0).getEstado());
+//			System.out.println("JsonObject: " + JsonObject.toString());
 			String JSON = prettyGson.toJson(articuloDTOs);
 			System.out.println("JSON: " + JSON.toString());
 			URL url;
-			System.out.println("URL: " + URL + JSON);
-			url = new URL(URL + JSON);
+			String ecodedValue1  = URLEncoder.encode(JSON, StandardCharsets.UTF_8.name());
+			System.out.println("URL: " + URL + ecodedValue1 );
+			url = new URL(URL + ecodedValue1 );
 			
 			
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

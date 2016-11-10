@@ -1,5 +1,6 @@
 package serviceMessages;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,6 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
 import controler.IDepositoControladorLocal;
@@ -38,7 +40,10 @@ public class ReceptorCompraMessage implements MessageListener {
      */
     public void onMessage(Message message) {
     	try {
-			if(message instanceof SolicitudCompraDTO){
+    		ObjectMessage om = (ObjectMessage) message;
+    		Serializable objectData = om.getObject();
+    		SolicitudCompraDTO aasdsaa = (SolicitudCompraDTO) objectData;
+			if(om instanceof SolicitudCompraDTO){
 				SolicitudCompraDTO solCompraDTO = (SolicitudCompraDTO) message;
 				ejb.crearRecepcionCompra(solCompraDTO);
 			}
