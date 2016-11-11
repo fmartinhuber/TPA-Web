@@ -10,11 +10,15 @@ import javax.jms.Queue;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.artemis.jms.client.ActiveMQXAJMSContext;
+import org.apache.log4j.Logger;
+
+import servlets.PruebaServlet;
 
 
 @Stateless
 public class ProductorDepositoMessage {
 
+	static Logger log = Logger.getLogger(ProductorDepositoMessage.class.getName());
 
 	@Resource(lookup = "java:/jms/queue/testQueue")
 	private Queue testQueue;

@@ -1,7 +1,8 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,12 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
+import dto.ItemSolicitudCompraDTO;
 import dto.SolicitudArticuloDTO;
 import dto.SolicitudCompraDTO;
-//import bean.ArticuloBean;
-import dto.*;
 import serviceREST.SolicitudCompraFabricaClient;
 
 /**
@@ -27,6 +29,8 @@ public class PruebaServlet extends HttpServlet {
     
 	@EJB
 	IDepositoControladorLocal controlador;
+	
+	static Logger log = Logger.getLogger(PruebaServlet.class.getName());
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -56,6 +60,17 @@ public class PruebaServlet extends HttpServlet {
 		solicitudCompraDTO.setCodigo(1);
 		solicitudCompraDTO.setPendiente("pendiente");
 		solicitudCompraDTO.setSolicitudesArticulos(solicitudesArticulo);
+		ItemSolicitudCompraDTO itemSolicitudCompraDTO = new ItemSolicitudCompraDTO();
+		itemSolicitudCompraDTO.setCantidad(1);
+		ArticuloDTO articuloDTO = new ArticuloDTO();
+		articuloDTO.setCodArticulo(1);
+		articuloDTO.setMarca("marca");
+		articuloDTO.setColor("color");
+		itemSolicitudCompraDTO.setArticulo(articuloDTO);
+		List <ItemSolicitudCompraDTO> list = new ArrayList <ItemSolicitudCompraDTO>();
+		list.add(itemSolicitudCompraDTO);
+		solicitudCompraDTO.setItemsSolicitudesCompra(list);
+		
 		controlador.crearSolicitudCompra(solicitudCompraDTO);
 		
 		SolicitudCompraFabricaClient.conexion(solicitudCompraDTO);

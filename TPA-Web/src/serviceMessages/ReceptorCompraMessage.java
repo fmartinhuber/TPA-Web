@@ -26,6 +26,8 @@ import dto.SolicitudCompraDTO;
 		mappedName = "java:/jms/queue/recepcionCompra")
 public class ReceptorCompraMessage implements MessageListener {
 
+	static Logger log = Logger.getLogger(ReceptorCompraMessage.class.getName());
+	
 	@EJB
 	IDepositoControladorLocal ejb;
     /**
@@ -42,9 +44,8 @@ public class ReceptorCompraMessage implements MessageListener {
     	try {
     		ObjectMessage om = (ObjectMessage) message;
     		Serializable objectData = om.getObject();
-    		SolicitudCompraDTO aasdsaa = (SolicitudCompraDTO) objectData;
-			if(om instanceof SolicitudCompraDTO){
-				SolicitudCompraDTO solCompraDTO = (SolicitudCompraDTO) message;
+			if(objectData instanceof SolicitudCompraDTO){
+				SolicitudCompraDTO solCompraDTO = (SolicitudCompraDTO) objectData;
 				ejb.crearRecepcionCompra(solCompraDTO);
 			}
 			
