@@ -1,5 +1,5 @@
 # TPA-Web
-## GRUPO-12-DEPOSITO
+### GRUPO-12-DEPOSITO
 TPA-Web
 
 - CrearArticuloJAXRSClient: http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/articulo?articulo=
