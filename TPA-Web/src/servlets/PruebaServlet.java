@@ -54,6 +54,7 @@ public class PruebaServlet extends HttpServlet {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
 		List <SolicitudArticuloDTO> solicitudesArticulo = controlador.listarSolicitudArticuloPendiente();
 		
 		SolicitudCompraDTO solicitudCompraDTO = new SolicitudCompraDTO();
