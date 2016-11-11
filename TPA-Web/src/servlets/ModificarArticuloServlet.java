@@ -54,7 +54,8 @@ public class ModificarArticuloServlet extends HttpServlet {
 
 		ArticuloDTO newArticulo = new ArticuloDTO();
 		
-		newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
+		//newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
+		newArticulo.setCodArticulo(request.getParameter("codigo"));
 		newArticulo.setCantidadDisponible(Integer.valueOf(request.getParameter("cantidad")));
 				
 		if( newArticulo.getCodArticulo().equals(null) ){

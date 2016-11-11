@@ -62,7 +62,8 @@ public class CrearArticuloServlet extends HttpServlet {
 		
 		//newArticulo.setId(ArticuloDao.getInstancia().obtenerMaximoIdArticulo());	
 		newArticulo.setIdDeposito(request.getParameter("deposito"));
-		newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
+		//newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
+		newArticulo.setCodArticulo(request.getParameter("codigo"));
 		newArticulo.setDescripcion(request.getParameter("descripcion"));
 		newArticulo.setFecha(day01);
 		newArticulo.setFoto(request.getParameter("foto"));
