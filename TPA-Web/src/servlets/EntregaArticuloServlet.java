@@ -59,7 +59,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		
 		
 		
-		//-----ARTICULOS HARDCODEADOS-----//
+/*		//-----ARTICULOS HARDCODEADOS-----//
 		//Hardcodeo un string doblemente parseado de Articulos, por row y columnas. Deberia buscarse en la base y armarse aca
 		if (request.getParameter("opcion").equalsIgnoreCase("obtArticulos")){
 			//Obtengo la solicitud a buscar
@@ -72,6 +72,15 @@ public class EntregaArticuloServlet extends HttpServlet  {
 				response.getWriter().write(articulosHardcore);
 			}
 			
+		}
+*/		
+		if (request.getParameter("opcion").equalsIgnoreCase("obtArticulos")){
+			//Obtengo la solicitud a buscar
+			String solicitudABuscar = request.getParameter("solicitudBuscada");
+			
+			//Obtenemos de la base los Articulos de ItemSolicitudArticulos de la SolicitudArticulo buscada
+			List<ArticuloDTO> articulosDto = new ArrayList<ArticuloDTO>();
+			articulosDto = depositoEntregaArticulo.obtenerArticulosDeSolicitud(solicitudABuscar);
 		}
 		
 		
