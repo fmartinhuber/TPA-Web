@@ -57,11 +57,16 @@ public class ModificarArticuloServlet extends HttpServlet {
 		newArticulo.setCodArticulo(Integer.valueOf(request.getParameter("codigo")));
 		newArticulo.setCantidadDisponible(Integer.valueOf(request.getParameter("cantidad")));
 				
-		deposito.modificarArticulo(newArticulo);
-		//deposito.modificarStockDelArticulo(newArticulo);
-		
-		response.getWriter().print("<h1> Se modificó el stock del artículo<h1>");				
-		response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");		
+		if( newArticulo.getCodArticulo().equals(null) ){
+			response.getWriter().print("<h1>El código ingresado no existe<h1>");				
+			response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");
+		}
+		else{
+			deposito.modificarStockDelArticulo(newArticulo);
+			
+			response.getWriter().print("<h1> Se modificó el stock del artículo<h1>");				
+			response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");
+		}							
 	}
 
 }
