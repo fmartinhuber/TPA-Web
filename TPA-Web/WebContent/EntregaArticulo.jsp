@@ -137,6 +137,13 @@
 			}
 		});
 	});
+
+	//Realizar Entrega de Articulo
+	$(document).ready(function() {
+		$("#modificarArticulo").click(function(){
+			var accion = "entregaArticulos";
+		});
+	});
 	
 	//Valida numeros Naturales
 	function esNatural(parametroStr) {
@@ -212,6 +219,12 @@
 				 	Cantidad Solicitada: <input type="text" name="cantSolicitadaArticulo" id="cantSolicitadaArticulo" disabled readonly><br>
 				 	Nueva cantidad a solicitar: <input type="text" name="nuevaCantidadArticulo" id="nuevaCantidadArticulo"><br>
 				 	<button type="button" id="modificarArticulo" name="modificarArticulo">Aceptar</button><br>
+				 	
+				 	<br><br>
+				 	<hr>
+				 	<br><br>
+				 	
+				 	<button type="button" id="realizarEntrega" name="realizarEntrega">Realizar Entrega de Articulo</button><br>
 				 	
 				 </div><!-- col -lg-8 -->
     		</div><!-- /row -->

@@ -1,15 +1,25 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.*;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.*;
+
+import controler.IDepositoControladorLocal;
+import controler.IEntregaArticuloControladorLocal;
+
 @WebServlet("/EntregaArticuloServlet")
 public class EntregaArticuloServlet extends HttpServlet  {
+	
+	@EJB
+	IEntregaArticuloControladorLocal depositoEntregaArticulo;
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,18 +34,32 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		//response.getWriter().write("POR FAVOR FUNCIONA");
 		
 		
-		//-----SOLICITUDES HARDCODEADAS-----//
+/*		//-----SOLICITUDES HARDCODEADAS-----//
 		//Hardcodeo un string doblemente parseado de Solicitudes, por row y columnas. Deberia buscarse en la base y armarse aca
 		if (request.getParameter("opcion").equalsIgnoreCase("obtSolPen")){
 			//Parametros: Codigo;Fecha
 			String solicitudesHardcore = "G12JO5I1;?24/08/2016-??G12I95TA;?11/09/2016-??G129IT15;?17/10/2016";
 			response.getWriter().write(solicitudesHardcore);
+		}
+*/			
+		if (request.getParameter("opcion").equalsIgnoreCase("obtSolPen")){
+			//Obtenemos de la base las SolicitudesArticulo Pendientes
+			List<SolicitudArticuloDTO> solisArtDto = new ArrayList<SolicitudArticuloDTO>();
+			solisArtDto = depositoEntregaArticulo.listarSolicitudesPendientes();
 			
-			
+			//Formateo la salida parseando columnas con ";?" y filas con "-??"
+			String respuesta = "";
+			for (SolicitudArticuloDTO s : solisArtDto){
+				respuesta += s.getCodigo() + ";?" + s.getFechaEntrega() + "-??";
+			}
+			//Cortamos el "-??" final y enviamos la respuesta
+			respuesta.substring(0, respuesta.length()-3);
+			response.getWriter().write(respuesta);
 		}
 		
 		
-		//-----ARTICULOS HARDCODEADOS-----//
+		
+/*		//-----ARTICULOS HARDCODEADOS-----//
 		//Hardcodeo un string doblemente parseado de Articulos, por row y columnas. Deberia buscarse en la base y armarse aca
 		if (request.getParameter("opcion").equalsIgnoreCase("obtArticulos")){
 			//Obtengo la solicitud a buscar
@@ -49,6 +73,16 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			}
 			
 		}
+*/		
+		if (request.getParameter("opcion").equalsIgnoreCase("obtArticulos")){
+			//Obtengo la solicitud a buscar
+			String solicitudABuscar = request.getParameter("solicitudBuscada");
+			
+			//Obtenemos de la base los Articulos de ItemSolicitudArticulos de la SolicitudArticulo buscada
+			List<ArticuloDTO> articulosDto = new ArrayList<ArticuloDTO>();
+			articulosDto = depositoEntregaArticulo.obtenerArticulosDeSolicitud(solicitudABuscar);
+		}
+		
 		
 		
 		//----- MOSTRAR CANTIDAD ARTICULOS HARDCODEADOS-----//

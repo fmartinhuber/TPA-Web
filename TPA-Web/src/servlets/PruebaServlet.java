@@ -58,14 +58,14 @@ public class PruebaServlet extends HttpServlet {
 		List <SolicitudArticuloDTO> solicitudesArticulo = controlador.listarSolicitudArticuloPendiente();
 		
 		SolicitudCompraDTO solicitudCompraDTO = new SolicitudCompraDTO();
-		solicitudCompraDTO.setCodigo(1);
-//		solicitudCompraDTO.setCodigo("1");
+//		solicitudCompraDTO.setCodigo(1);
+		solicitudCompraDTO.setCodigo("1");
 		solicitudCompraDTO.setPendiente("pendiente");
 		solicitudCompraDTO.setSolicitudesArticulos(solicitudesArticulo);
 		ItemSolicitudCompraDTO itemSolicitudCompraDTO = new ItemSolicitudCompraDTO();
 		itemSolicitudCompraDTO.setCantidad(1);
 		ArticuloDTO articuloDTO = new ArticuloDTO();
-		articuloDTO.setCodArticulo(1);
+		articuloDTO.setCodArticulo("1");
 		articuloDTO.setMarca("marca");
 		articuloDTO.setColor("color");
 		itemSolicitudCompraDTO.setArticulo(articuloDTO);
