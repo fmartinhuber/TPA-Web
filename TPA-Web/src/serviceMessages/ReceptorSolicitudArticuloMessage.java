@@ -1,7 +1,9 @@
 package serviceMessages;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -52,17 +54,17 @@ public class ReceptorSolicitudArticuloMessage implements MessageListener {
 			String messageText = null;
 			if(message instanceof TextMessage){
 				messageText = ((TextMessage)message).getText();
-				JSONObject json = new JSONObject();
-				
-				String despacho = json.getString("idDespacho");
+				JSONObject json = new JSONObject(messageText);
 				ArticuloDTO articulo = deposito.obtenerArticuloPorCodigo(json.getString("codArticulo"));
 				SolicitudArticuloDTO solicitud = new SolicitudArticuloDTO();
 				solicitud.setCodigo(articulo.getCodArticulo());
 				solicitud.setEstado("Pendiente");
 				solicitud.setFechaEntrega(new Date(2016,12,31));
-				//solicitud.setIdDespacho(json.getString("idDespacho"));
+				solicitud.setIdModulo(json.getString("idDespacho"));
 				ItemSolicitudArticuloDTO itemSolArt = new ItemSolicitudArticuloDTO(articulo,Integer.parseInt(json.getString("cantidad")));
-								  											
+				List<ItemSolicitudArticuloDTO> listaArt = new ArrayList<ItemSolicitudArticuloDTO>();
+				listaArt.add(itemSolArt);
+				solicitud.setItemsSolicitudArticulo(listaArt);
 				deposito.crearSolicitudArticulo(solicitud);
 			}
 			Logger.getAnonymousLogger().info("Mensaje recibido: " + messageText);
