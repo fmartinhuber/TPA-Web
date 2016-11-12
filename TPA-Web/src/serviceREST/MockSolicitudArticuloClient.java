@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 
 import dto.SolicitudCompraDTO;
 
-public class MockCrearArticuloJAXRSClient {
+public class MockSolicitudArticuloClient {
 
 	@GET
 	@Path("/solicitudCompra")
