@@ -7,11 +7,9 @@ import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
-import javax.jms.TextMessage;
 
 import org.apache.log4j.Logger;
 
-import dto.SolicitudArticuloDTO;
 import dto.SolicitudCompraDTO;
 
 @Stateless

@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
-import serviceREST.CrearArticuloJAXRSClient;
+import serviceREST.CrearArticuloClient;
 
 
 @WebServlet("/CrearArticuloServlet")
@@ -82,6 +85,9 @@ public class CrearArticuloServlet extends HttpServlet {
 		
 		
 		deposito.crearArticulo(newArticulo);
+		Gson prettyGson = new GsonBuilder().serializeNulls().create();
+		String JSON = prettyGson.toJson(newArticulo); 
+		CrearArticuloClient.conexion(newArticulo);
 		
 		response.getWriter().print("<h1> Se creó el artículo de tipo " +newArticulo.getTipo()+"<h1>");		
 		response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");		

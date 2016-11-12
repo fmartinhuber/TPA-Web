@@ -9,29 +9,28 @@ import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
-import dto.ArticuloDTO;
+import dto.SolicitudArticuloDTO;
 
-public class CrearArticuloJAXRSClient {
-	
-	public static void conexion(ArticuloDTO articuloDTO){
-		
+public class SolicitudArticuloClient {
+
+	public static void conexion(SolicitudArticuloDTO solicitudArticuloDTO) {
+
 		try {
-			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/articulo=?";
+			String URL = "http://192.168.1.45:8080/WebStock/rest/despacho/recibirArticulos";
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();
-//			JsonObject jsonObject = new JsonObject();
-//			jsonObject.addProperty("codigo", articuloDTO);
-//			System.out.println("JsonObject: " + JsonObject.toString());
-			String JSON = prettyGson.toJson(articuloDTO);
+			// JsonObject jsonObject = new JsonObject();
+			// jsonObject.addProperty("codigo", articuloDTO);
+			// System.out.println("JsonObject: " + JsonObject.toString());
+			String JSON = prettyGson.toJson(solicitudArticuloDTO);
 			System.out.println("JSON: " + JSON.toString());
 			URL url;
-			String ecodedValue1  = URLEncoder.encode(JSON.toString(), StandardCharsets.UTF_8.name());
-			System.out.println("URL: " + URL + ecodedValue1 );
-			
+			String ecodedValue1 = URLEncoder.encode(JSON.toString(), StandardCharsets.UTF_8.name());
+			System.out.println("URL: " + URL + ecodedValue1);
+
 			url = new URL(URL + ecodedValue1);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			
+
 			if (urlConnection.getResponseCode() != 200) {
 				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
 			}
@@ -40,6 +39,6 @@ public class CrearArticuloJAXRSClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

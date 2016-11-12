@@ -195,8 +195,6 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-			    	<!--<h1>SOLICITUD DE ARTICULO - ESTO LO HACE: DARO</h1>-->
-			    	<!--<h5>ACA HACE TU MAGIA </h5>-->
 			    	
 			    	Solicitud de Articulos
 			    	<table id=SolicitudArticulo>
