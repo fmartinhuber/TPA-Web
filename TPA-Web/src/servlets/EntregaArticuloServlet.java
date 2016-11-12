@@ -181,10 +181,14 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			depositoEntregaArticulo.decrementarStock(solicitudABuscar);
 			
 			//Mandar JSON
-			depositoEntregaArticulo.enviarJSON(solicitudABuscar);
+			SolicitudArticuloDTO miSolArtDto = new SolicitudArticuloDTO();
+			miSolArtDto = depositoEntregaArticulo.enviarJSON(solicitudABuscar);
+			//MAR, ACA TENES QUE MANDAR MISOLARTDTO POR JSON A DESPACHO
 			
 			//Actualizar estado Solicitud
 			depositoEntregaArticulo.actualizarEstadoSolicitud(solicitudABuscar);
+			
+			//
 			
 		}
 
