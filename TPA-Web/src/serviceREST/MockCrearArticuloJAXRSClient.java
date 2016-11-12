@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
-import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -14,24 +13,16 @@ import javax.ws.rs.QueryParam;
 
 import com.google.gson.Gson;
 
-import controler.DepositoControlador;
-import dto.ArticuloDTO;
-import dto.SolicitudArticuloDTO;
 import dto.SolicitudCompraDTO;
-import serviceMessages.ProductorFabricaMessage;
 
-@Path("/service")
-public class SolicitudCompraFabricaApp {
+public class MockCrearArticuloJAXRSClient {
 
-	@EJB
-	ProductorFabricaMessage productor;
-	
 	@GET
-	@Path("/solicitudCompra")
+	@Path("/articulo")
 //	@Path("/{solicitudCompra}")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })
-	public String solicitudCompra(@DefaultValue("prueeeeba") @QueryParam("solicitud") String json) {
+	public String articulo(@DefaultValue("prueeeeba") @QueryParam("articulo") String json) {
 		
 		System.out.println(json.toString());
 		
@@ -40,13 +31,11 @@ public class SolicitudCompraFabricaApp {
 			Gson gson = new Gson ();
 			System.out.println("json: " + json.toString());
 			System.out.println("decoded: " + decodedValue1.toString());
-			SolicitudCompraDTO solicitudCompraDTO = gson.fromJson(json, SolicitudCompraDTO.class);
-			productor.sendMessage(solicitudCompraDTO);
-			return solicitudCompraDTO.toString();
+			SolicitudCompraDTO solicitudArticulo = gson.fromJson(json, SolicitudCompraDTO.class);
+			return solicitudArticulo.toString();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
 }

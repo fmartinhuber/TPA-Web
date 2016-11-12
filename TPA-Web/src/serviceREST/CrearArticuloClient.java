@@ -17,6 +17,7 @@ public class CrearArticuloClient {
 	
 	public static void conexion(ArticuloDTO articuloDTO){
 		
+		
 		try {
 			String URL = "http://192.168.1.45:8080/WebStock/rest/despacho/recibirArticulos";
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();

@@ -177,17 +177,23 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			//Obtengo la solicitud a buscar
 			String solicitudABuscar = request.getParameter("solicitudBuscada");
 			
-			//Mandar JSON - Ayudame aca Mar
-			
-			
 			//Decrementar Stock
 			depositoEntregaArticulo.decrementarStock(solicitudABuscar);
+			
+			//Mandar JSON
+			SolicitudArticuloDTO miSolArtDto = new SolicitudArticuloDTO();
+			miSolArtDto = depositoEntregaArticulo.enviarJSON(solicitudABuscar);
+			//MAR, ACA TENES QUE MANDAR MISOLARTDTO POR JSON A DESPACHO
 			
 			//Actualizar estado Solicitud
 			depositoEntregaArticulo.actualizarEstadoSolicitud(solicitudABuscar);
 			
+			//
+			
 		}
+
 		
+
 	}
 
 
