@@ -66,6 +66,7 @@
 		});
 	});
 
+	
 	//Tabla Articulos al momento de busqueda
 	$(document).ready(function() {
 		$("#obtArticulos").click(function() {
@@ -94,19 +95,25 @@
 		});
 	});
 
+	
 	//Obtener Articulo a modificar
 	$(document).ready(function() {
 		$("#obtModifArticulos").click(function() {
 			var accion = "actArticulos";
 			var valorArtBuscado = $('#codModArticulo').val();
+			var valorSolBuscada = $('#solicitudMuestra').val();
 
-			$.get("EntregaArticuloServlet", {opcion: accion, articuloBuscado: valorArtBuscado}, function(responseText) {
+			$.get("EntregaArticuloServlet", {opcion: accion, articuloBuscado: valorArtBuscado, solicitudBuscada: valorSolBuscada}, function(responseText) {
 				var obtenido = responseText;
+				var obtParseRow = obtenido.split(";?");
 
 				//Si trajo datos muestro, sino alerta
 				if (obtenido.trim()){
-					//Seteo la cantidad como informacion en textfield disabled
-					$('#cantSolicitadaArticulo').val(obtenido);
+					//Seteo la cantidad como informacion en textfield disabled. 
+					//0: Cantidad Pedida
+					//1: Cantidad en Stock
+					$('#cantSolicitadaArticulo').val(obtParseRow[0]);
+					$('#cantStockArticulo').val(obtParseRow[1]);
 				}else{
 					alert("No se encontro el Articulo ingresado");
 				}
@@ -122,15 +129,17 @@
 			var accion = "setCantArticulos";
 			var nuevaCantidad = $('#nuevaCantidadArticulo').val();
 			var articuloAModificar = $('#codModArticulo').val();
+			var valorSolBuscada = $('#solicitudMuestra').val();
 			
 			//Si es Natural o cero continuo, sino alerta
 			if (esNatural(nuevaCantidad)){
-				$.get("EntregaArticuloServlet", {opcion: accion, nuevaCant: nuevaCantidad, articulo: articuloAModificar}, function(responseText) {
+				$.get("EntregaArticuloServlet", {opcion: accion, nuevaCant: nuevaCantidad, articulo: articuloAModificar, solicitudBuscada: valorSolBuscada}, function(responseText) {
 					//Blanqueo campos y alerta que se actualizo de forma correcta
 					alert("Cantidad de Articulo modificada de forma correcta");
 					$('#codModArticulo').val('');
 					$('#cantSolicitadaArticulo').val('');
-					$('#nuevaCantidadArticulo').val('');					
+					$('#nuevaCantidadArticulo').val('');
+					$('#cantStockArticulo').val('');
 				});
 			}else{
 				alert("Por favor, ingrese un numero Natural");
@@ -138,12 +147,18 @@
 		});
 	});
 
+	
 	//Realizar Entrega de Articulo
 	$(document).ready(function() {
-		$("#modificarArticulo").click(function(){
-			var accion = "entregaArticulos";
+		$("#realizarEntrega").click(function(){
+			var accion = "realizarEntrega";
+			var valorSolBuscada = $('#solicitudMuestra').val();
+			$.get("EntregaArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
+				alert("Se realiza la entrega a Despacho de la Solicitud: " + valorSolBuscada);
+			});
 		});
 	});
+
 	
 	//Valida numeros Naturales
 	function esNatural(parametroStr) {
@@ -217,6 +232,7 @@
 				 	Codigo Articulo: <input type="text" name="codModArticulo" id="codModArticulo">
 				 	<button type="button" id="obtModifArticulos" name="obtModifArticulos">Modificar Articulo</button><br>
 				 	Cantidad Solicitada: <input type="text" name="cantSolicitadaArticulo" id="cantSolicitadaArticulo" disabled readonly><br>
+				 	Cantidad en Stock: <input type="text" name="cantStockArticulo" id="cantStockArticulo" disabled readonly><br>
 				 	Nueva cantidad a solicitar: <input type="text" name="nuevaCantidadArticulo" id="nuevaCantidadArticulo"><br>
 				 	<button type="button" id="modificarArticulo" name="modificarArticulo">Aceptar</button><br>
 				 	
@@ -225,6 +241,8 @@
 				 	<br><br>
 				 	
 				 	<button type="button" id="realizarEntrega" name="realizarEntrega">Realizar Entrega de Articulo</button><br>
+				 	
+				 	<br><br>
 				 	
 				 </div><!-- col -lg-8 -->
     		</div><!-- /row -->
