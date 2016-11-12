@@ -34,6 +34,9 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		//response.getWriter().write("POR FAVOR FUNCIONA");
 		
 		
+		
+		//----------------------------------------------------------------------------------------------------//
+		
 /*		//-----SOLICITUDES HARDCODEADAS-----//
 		//Hardcodeo un string doblemente parseado de Solicitudes, por row y columnas. Deberia buscarse en la base y armarse aca
 		if (request.getParameter("opcion").equalsIgnoreCase("obtSolPen")){
@@ -53,11 +56,13 @@ public class EntregaArticuloServlet extends HttpServlet  {
 				respuesta += s.getCodigo() + ";?" + s.getFechaEntrega() + "-??";
 			}
 			//Cortamos el "-??" final y enviamos la respuesta
-			respuesta.substring(0, respuesta.length()-3);
+			respuesta = respuesta.substring(0, respuesta.length()-3);
 			response.getWriter().write(respuesta);
 		}
 		
 		
+		
+		//----------------------------------------------------------------------------------------------------//
 		
 /*		//-----ARTICULOS HARDCODEADOS-----//
 		//Hardcodeo un string doblemente parseado de Articulos, por row y columnas. Deberia buscarse en la base y armarse aca
@@ -78,12 +83,31 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			//Obtengo la solicitud a buscar
 			String solicitudABuscar = request.getParameter("solicitudBuscada");
 			
-			//Obtenemos de la base los Articulos de ItemSolicitudArticulos de la SolicitudArticulo buscada
-			List<ArticuloDTO> articulosDto = new ArrayList<ArticuloDTO>();
-			articulosDto = depositoEntregaArticulo.obtenerArticulosDeSolicitud(solicitudABuscar);
+			//Obtenemos de la base los ItemSolicitudArticulos de la SolicitudArticulo buscada
+			List<ItemSolicitudArticuloDTO> itemSolArtDto = new ArrayList<ItemSolicitudArticuloDTO>();
+			itemSolArtDto = depositoEntregaArticulo.obtenerItemDeSolicitud(solicitudABuscar);
+			
+			//Formateo la salida parseando columnas con ";?" y filas con "-??"
+			String respuesta = "";
+			for (ItemSolicitudArticuloDTO i : itemSolArtDto){
+				respuesta += i.getArticulo().getCodArticulo() +  ";?" + i.getArticulo().getNombre() + ";?" + i.getArticulo().getDescripcion() + ";?" + i.getCantidad() + ";?";
+				//Valido si hay STOCK SUFICIENTE para cumplir el pedido y muestro el resultado
+				if (i.getCantidad() <= i.getArticulo().getCantidadDisponible()){
+					//Si se pide menos o igual que el stock, muestro OK
+					respuesta += "OK-??";
+				}else{
+					//Si se pide mas, muestro NO OK
+					respuesta += "Stock Insuficiente-??";
+				}
+			}
+			//Cortamos el "-??" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-3);
+			response.getWriter().write(respuesta);
 		}
 		
 		
+		
+		//----------------------------------------------------------------------------------------------------//
 		
 		//----- MOSTRAR CANTIDAD ARTICULOS HARDCODEADOS-----//
 		//Hardcodeo la busqueda del Articulo G12890471
