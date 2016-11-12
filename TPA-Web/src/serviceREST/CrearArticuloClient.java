@@ -43,4 +43,34 @@ public class CrearArticuloClient {
 		}
 		
 	}
+	
+	public static void logisticaConexion(ArticuloDTO articuloDTO){
+				
+		
+		try {
+			
+			String URL = "http://192.168.1.45:8080/WebStock/rest/despacho/recibirArticulos";
+			Gson prettyGson = new GsonBuilder().serializeNulls().create();
+//			JsonObject jsonObject = new JsonObject();
+//			jsonObject.addProperty("codigo", articuloDTO);
+//			System.out.println("JsonObject: " + JsonObject.toString());
+			String JSON = prettyGson.toJson(articuloDTO);
+			System.out.println("JSON: " + JSON.toString());
+			URL url;
+			String ecodedValue1  = URLEncoder.encode(JSON.toString(), StandardCharsets.UTF_8.name());
+			System.out.println("URL: " + URL + ecodedValue1 );
+			
+			url = new URL(URL + ecodedValue1);
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			
+			if (urlConnection.getResponseCode() != 200) {
+				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

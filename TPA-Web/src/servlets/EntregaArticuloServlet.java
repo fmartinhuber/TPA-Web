@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.*;
-
+import serviceREST.SolicitudArticuloClient;
 import controler.IDepositoControladorLocal;
 import controler.IEntregaArticuloControladorLocal;
 
@@ -184,6 +184,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			SolicitudArticuloDTO miSolArtDto = new SolicitudArticuloDTO();
 			miSolArtDto = depositoEntregaArticulo.enviarJSON(solicitudABuscar);
 			//MAR, ACA TENES QUE MANDAR MISOLARTDTO POR JSON A DESPACHO
+			SolicitudArticuloClient.conexion(miSolArtDto);
 			
 			//Actualizar estado Solicitud
 			depositoEntregaArticulo.actualizarEstadoSolicitud(solicitudABuscar);
