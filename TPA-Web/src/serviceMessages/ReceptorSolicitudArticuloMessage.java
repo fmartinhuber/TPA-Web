@@ -2,7 +2,9 @@ package serviceMessages;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
@@ -41,9 +43,9 @@ public class ReceptorSolicitudArticuloMessage implements MessageListener {
 			String messageText = null;
 			if(message instanceof TextMessage){
 				messageText = ((TextMessage)message).getText();
-				SolicitudArticuloDTO asd = null;
-				//ToDo: Convertir a JSON con el formato solicitudarticuloDTO
-				deposito.crearSolicitudArticulo(asd);
+				ObjectMapper mapper = new ObjectMapper();
+				SolicitudArticuloDTO solicitud = mapper.readValue(messageText, SolicitudArticuloDTO.class);
+				deposito.crearSolicitudArticulo(solicitud);
 			}
 			Logger.getAnonymousLogger().info("Mensaje recibido: " + messageText);
 		} catch (Exception e) {
