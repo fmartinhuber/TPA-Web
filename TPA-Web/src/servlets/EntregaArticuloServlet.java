@@ -45,7 +45,8 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			String solicitudesHardcore = "G12JO5I1;?24/08/2016-??G12I95TA;?11/09/2016-??G129IT15;?17/10/2016";
 			response.getWriter().write(solicitudesHardcore);
 		}
-*/			
+*/		
+		//OBTENER SOLICITUD DE ARTICULOS
 		if (request.getParameter("opcion").equalsIgnoreCase("obtSolPen")){
 			//Obtenemos de la base las SolicitudesArticulo Pendientes
 			List<SolicitudArticuloDTO> solisArtDto = new ArrayList<SolicitudArticuloDTO>();
@@ -81,6 +82,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			
 		}
 */		
+		//OBTENER ARTICULOS DE SOLICITUD SELECCIONADA
 		if (request.getParameter("opcion").equalsIgnoreCase("obtArticulos")){
 			//Obtengo la solicitud a buscar
 			String solicitudABuscar = request.getParameter("solicitudBuscada");
@@ -122,7 +124,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			response.getWriter().write("2");
 		}
 */
-		
+		//MOSTRAR CANT DE ARTICULO Y STOCK DE ARTICULO SELECCIONADO
 		if (request.getParameter("opcion").equalsIgnoreCase("actArticulos")){
 			//Obtengo el codigo articulo buscado
 			String codArticulo = request.getParameter("articuloBuscado");
@@ -151,7 +153,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		
 		//----------------------------------------------------------------------------------------------------//
 		
-
+		//ACTUALIZAR CANTIDAD PEDIDA
 		if (request.getParameter("opcion").equalsIgnoreCase("setCantArticulos")){
 			//Obtengo la nueva cantidad ingresada
 			String nuevaCantS = request.getParameter("nuevaCant");
@@ -170,6 +172,21 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		
 		//----------------------------------------------------------------------------------------------------//
 		
+		//REALIZAR PEDIDO - MANDAR JSON, DECREMENTAR STOCK, CAMBIAR ESTADO SOLICITUD
+		if (request.getParameter("opcion").equalsIgnoreCase("realizarEntrega")){
+			//Obtengo la solicitud a buscar
+			String solicitudABuscar = request.getParameter("solicitudBuscada");
+			
+			//Mandar JSON - Ayudame aca Mar
+			
+			
+			//Decrementar Stock
+			depositoEntregaArticulo.decrementarStock(solicitudABuscar);
+			
+			//Actualizar estado Solicitud
+			depositoEntregaArticulo.actualizarEstadoSolicitud(solicitudABuscar);
+			
+		}
 		
 	}
 

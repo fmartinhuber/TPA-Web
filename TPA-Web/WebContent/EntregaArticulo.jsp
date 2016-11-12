@@ -150,8 +150,12 @@
 	
 	//Realizar Entrega de Articulo
 	$(document).ready(function() {
-		$("#modificarArticulo").click(function(){
-			var accion = "entregaArticulos";
+		$("#realizarEntrega").click(function(){
+			var accion = "realizarEntrega";
+			var valorSolBuscada = $('#solicitudMuestra').val();
+			$.get("EntregaArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
+				alert("Se realiza la entrega a Despacho de la Solicitud: " + valorSolBuscada);
+			});
 		});
 	});
 
