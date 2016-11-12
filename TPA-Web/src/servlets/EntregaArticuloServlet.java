@@ -35,6 +35,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		
 		
 		
+		
 		//----------------------------------------------------------------------------------------------------//
 		
 /*		//-----SOLICITUDES HARDCODEADAS-----//
@@ -59,6 +60,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			respuesta = respuesta.substring(0, respuesta.length()-3);
 			response.getWriter().write(respuesta);
 		}
+		
 		
 		
 		
@@ -107,9 +109,10 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		
 		
 		
+		
 		//----------------------------------------------------------------------------------------------------//
 		
-		//----- MOSTRAR CANTIDAD ARTICULOS HARDCODEADOS-----//
+/*		//----- MOSTRAR CANTIDAD ARTICULOS HARDCODEADOS-----//
 		//Hardcodeo la busqueda del Articulo G12890471
 		if (request.getParameter("opcion").equalsIgnoreCase("actArticulos")){
 			//Obtengo el codigo articulo buscado
@@ -118,14 +121,41 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			//Devuelvo la cantidad hardcodeadisima de 2
 			response.getWriter().write("2");
 		}
+*/
+		
+		if (request.getParameter("opcion").equalsIgnoreCase("actArticulos")){
+			//Obtengo el codigo articulo buscado
+			String codArticulo = request.getParameter("articuloBuscado");
+			//Obtengo la solicitud a buscar
+			String solicitudABuscar = request.getParameter("solicitudBuscada");
+			
+			//Obtenemos de la base los ItemSolicitudArticulos de la SolicitudArticulo buscada
+			List<ItemSolicitudArticuloDTO> itemSolArtDto = new ArrayList<ItemSolicitudArticuloDTO>();
+			itemSolArtDto = depositoEntregaArticulo.obtenerItemDeSolicitud(solicitudABuscar);
+			
+			//Formateo la salida parseando Cantidad Pedida;?Cantidad en Stock
+			String respuesta = "";
+			//Seteamos los valores obtenidos
+			for (ItemSolicitudArticuloDTO i : itemSolArtDto){
+				//Si coincide el Articulo es el que buscamos
+				if (i.getArticulo().getCodArticulo().equalsIgnoreCase(codArticulo)){
+					respuesta += i.getCantidad() + ";?" + i.getArticulo().getCantidadDisponible();
+				}
+			}
+			//Enviamos la respuesta
+			response.getWriter().write(respuesta);
+		}
 		
 		
-		//----- ACTUALIZAR CANTIDAD ARTICULOS HARDCODEADOS-----//
-		/*Hardcodeo la actualizacion del Articulo G12890471. Aca se deberia recorrer a lista de Articulos de la Solicitud, encontrarlo, modificar su cantidad y actualizarlo en la base
-		de esta forma al volver a consultarlo ya estaria actualizado*/
+		
+		
+		//----------------------------------------------------------------------------------------------------//
+		
+
 		if (request.getParameter("opcion").equalsIgnoreCase("setCantArticulos")){
 			
 		}
+
 		
 	}
 
