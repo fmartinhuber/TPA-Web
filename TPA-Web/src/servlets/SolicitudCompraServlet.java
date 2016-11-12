@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,9 @@ public class SolicitudCompraServlet extends HttpServlet {
 	IEntregaArticuloControladorLocal depositoEntregaArticulo;
 	
 	private static final long serialVersionUID = 1L;
-       
+	
+	private ArrayList<String> cadenaStringSalida = new ArrayList<String>();
+	
     public SolicitudCompraServlet() {
 
     }
@@ -73,7 +76,23 @@ public class SolicitudCompraServlet extends HttpServlet {
 			//Cortamos el "-??" final y enviamos la respuesta
 			respuesta = respuesta.substring(0, respuesta.length()-3);
 			response.getWriter().write(respuesta);
+			
+			
+			
 		}
+		
+		
+		
+		
+		//----------------------------------------------------------------------------------------------------//
+		
+		if (request.getParameter("opcion").equalsIgnoreCase("ingresarArticulos")){
+
+			//ACA IR CAGANDO EL FUCKING ARRAY CON LOS CODIGOSOL;CODIGOART;CANT, Y DESPUES DAR RESPUESTA AL
+			//SERVLET PARSEADO COMO ANTES
+			
+		}
+		
 		
 	}
 

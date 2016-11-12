@@ -97,15 +97,13 @@
 			var valorSolBuscada = $('#solicitudSeleccionada').val();
 			var valorCompraArticulo =  $('#codCompraArticulo').val();
 			var valorCantAComprar = $('#cantAComprar').val();
-			$.get("SolicitudCompraServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
-				var obtenido = responseText;
-				var obtParseRow = obtenido.split("-??");
 
-				for(var i=0; i < Object.keys(obtParseRow).length; i++){
-					var obtParseColumn = obtParseRow[i].split(";?");
-					html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td><td>' + obtParseColumn[3] + '</td><td>' + obtParseColumn[4] + '</td></tr>'; 
-				}
-				$('#DetalleSolicitado tr').first().after(html);	
+			//ACA RECIBIR EL PUTO ARRAY PARSEADO Y MOSTRARLO
+			
+			html += '<tr><td>' + valorSolBuscada + '</td><td>' + valorCompraArticulo + '</td><td>' + valorCantAComprar + '</td><td>'; 
+			
+			$('#DetalleSolicitado tr').first().after(html);
+			
 			});
 		});
 	});
