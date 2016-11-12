@@ -153,6 +153,28 @@ public class EntregaArticuloServlet extends HttpServlet  {
 		
 
 		if (request.getParameter("opcion").equalsIgnoreCase("setCantArticulos")){
+			//Obtengo la nueva cantidad ingresada
+			String nuevaCantS = request.getParameter("nuevaCant");
+			Integer nuevaCant = Integer.parseInt(nuevaCantS);
+			//Obtengo el Articulo
+			String articuloBuscado = request.getParameter("articulo");
+			//Obtengo la solicitud a buscar
+			String solicitudABuscar = request.getParameter("solicitudBuscada");
+			
+			/*//Obtenemos la solicitud buscada
+			SolicitudArticuloDTO miSolArtDto = new SolicitudArticuloDTO();
+			miSolArtDto = depositoEntregaArticulo.obtenerSolicitudArticuloPorCodigo(solicitudABuscar);
+			
+			//Actualizamos la cantidad del item
+			for (ItemSolicitudArticuloDTO isa : miSolArtDto.getItemsSolicitudArticulo()){
+				//Si es el item indicado, actualizamos la cantidad pedida
+				if (isa.getArticulo().getCodArticulo().equalsIgnoreCase(articuloBuscado)){
+					isa.setCantidad(nuevaCant);
+				}
+			}*/
+			
+			//Actualizamos la solicitud
+			depositoEntregaArticulo.actualizarSolicitudArticulo(solicitudABuscar, articuloBuscado, nuevaCant);
 			
 		}
 
@@ -160,6 +182,10 @@ public class EntregaArticuloServlet extends HttpServlet  {
 	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	
 
 }

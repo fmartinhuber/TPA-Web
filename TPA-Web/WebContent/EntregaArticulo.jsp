@@ -129,15 +129,17 @@
 			var accion = "setCantArticulos";
 			var nuevaCantidad = $('#nuevaCantidadArticulo').val();
 			var articuloAModificar = $('#codModArticulo').val();
+			var valorSolBuscada = $('#solicitudMuestra').val();
 			
 			//Si es Natural o cero continuo, sino alerta
 			if (esNatural(nuevaCantidad)){
-				$.get("EntregaArticuloServlet", {opcion: accion, nuevaCant: nuevaCantidad, articulo: articuloAModificar}, function(responseText) {
+				$.get("EntregaArticuloServlet", {opcion: accion, nuevaCant: nuevaCantidad, articulo: articuloAModificar, solicitudBuscada: valorSolBuscada}, function(responseText) {
 					//Blanqueo campos y alerta que se actualizo de forma correcta
 					alert("Cantidad de Articulo modificada de forma correcta");
 					$('#codModArticulo').val('');
 					$('#cantSolicitadaArticulo').val('');
-					$('#nuevaCantidadArticulo').val('');					
+					$('#nuevaCantidadArticulo').val('');
+					$('#cantStockArticulo').val('');
 				});
 			}else{
 				alert("Por favor, ingrese un numero Natural");
@@ -145,12 +147,14 @@
 		});
 	});
 
+	
 	//Realizar Entrega de Articulo
 	$(document).ready(function() {
 		$("#modificarArticulo").click(function(){
 			var accion = "entregaArticulos";
 		});
 	});
+
 	
 	//Valida numeros Naturales
 	function esNatural(parametroStr) {
