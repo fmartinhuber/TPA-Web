@@ -1,3 +1,5 @@
+<!-- SOLICITUD DE COMPRA - ESTO LO HACE: MAR -> Pero lo hace Daro porque es groso -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
@@ -18,9 +20,79 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     
     <script src="assets/js/modernizr.js"></script>
+    
+    <style>
+	table {
+	    font-family: arial, sans-serif;
+	    border-collapse: collapse;
+	    width: 100%;
+	}
+	
+	td, th {
+	    border: 1px solid #dddddd;
+	    text-align: left;
+	    padding: 8px;
+	}
+	
+	tr:nth-child(even) {
+	    background-color: #dddddd;
+	}
+	</style>
+    
   </head>
-<body>
-	    
+  
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	//Tabla Solicitudes de Articulos al iniciar la pagina
+	$(document).ready(function(){
+		var accion = "obtSolPen";
+		$.get("EntregaArticuloServlet", {opcion: accion}, function(responseText) {
+			var obtenido = responseText;
+			var obtParseRow = obtenido.split("-??");
+			$('#SolicitudArticulo tr').not(':first').remove();
+			var html = '';
+			for(var i=0; i < Object.keys(obtParseRow).length; i++){
+				var obtParseColumn = obtParseRow[i].split(";?");
+				html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td></tr>';
+				}
+			$('#SolicitudArticulo tr').first().after(html);
+		});
+	});
+	
+	
+	//Tabla Articulos al momento de busqueda
+	$(document).ready(function() {
+		$("#obtArticulos").click(function() {
+			var accion = "obtArticulos";
+			var valorSolBuscada = $('#solicitudSeleccionada').val();
+			$.get("EntregaArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
+				var obtenido = responseText;
+				var obtParseRow = obtenido.split("-??");
+	
+				//Si trajo datos muestro, sino alerta
+				if (obtenido.trim()){
+					//Seteo la solicitud utilizada como informacion en textfield disabled
+					$("#solicitudMuestra").val(valorSolBuscada);
+	
+					$('#DetalleSolicitado tr').not(':first').remove();
+					var html = '';
+					for(var i=0; i < Object.keys(obtParseRow).length; i++){
+						var obtParseColumn = obtParseRow[i].split(";?");
+						html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td><td>' + obtParseColumn[3] + '</td><td>' + obtParseColumn[4] + '</td></tr>'; 
+					}
+					$('#DetalleSolicitado tr').first().after(html);
+				}else{
+					alert("No se encontro la Solicitud de Articulos ingresada");
+				}
+			});
+		});
+	});
+
+</script>
+  
+  
+  
+<body>    
 	<!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -47,14 +119,45 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-			    	<h1>SOLICITUD DE COMPRA</h1>
-			    	
-			    	<table>
+			    			    	
+			    	Solicitud de Articulos
+			    	<table id=SolicitudArticulo>
 			    		<tr>
-							<td align="center"><input type="submit" value="Aceptar" onClick="enviar();"></td>
-							<td align="center"><input type="reset" value="Cancelar"></td>
-						</tr>
+			    			<td>Codigo</td>
+			    			<td>Fecha</td>
+			    		</tr>
 			    	</table>
+			    	<br><br>
+			    	
+			    	Codigo Solicitud de Articulos: <input type="text" name="solicitudSeleccionada" id="solicitudSeleccionada">
+			    	<button type="button" id="obtArticulos" name="obtArticulos">Obtener Articulos</button>
+			    	
+			    	<br><br>
+			    	Articulos de la Solicitud <input type="text" name="solicitudMuestra" id="solicitudMuestra" disabled readonly>
+					<table id=DetalleSolicitado>
+				 		<tr>
+				 			<td>Codigo</td>
+				 			<td>Nombre</td>
+				 			<td>Descripcion</td>
+				 			<td>Cantidad</td>
+				 			<td>Cumplimiento</td>
+				 		</tr>
+				 	</table>
+				 	
+				 	<br><br>
+				 	<hr>         
+				 	<br><br>
+				 	
+				 	<h4>Seleccionar Articulos a Comprar</h4>
+				 	
+				 	Codigo Articulo: <input type="text" name="codCompraArticulo" id="codCompraArticulo">
+				 	<button type="button" id="obtenerCodigoArt" name="obtenerCodigoArt">Obtener Articulo</button><br> 
+				 	Cantidad recomendada a comprar: <input type="text" name="cantRecomendada" id="cantRecomendada" disabled readonly><br>
+				 	Cantidad a comprar: <input type="text" name="cantAComprar" id="cantAComprar"><br>
+				 	
+				 	
+				 	
+				 	
 			    	
     		</div><!-- /row -->
 	    </div> <!-- /container -->
