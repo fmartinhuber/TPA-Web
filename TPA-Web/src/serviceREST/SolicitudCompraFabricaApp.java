@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 
 import com.google.gson.Gson;
 
+import controler.DepositoControlador;
 import dto.ArticuloDTO;
 import dto.SolicitudArticuloDTO;
 import dto.SolicitudCompraDTO;
@@ -22,12 +23,15 @@ import serviceMessages.ProductorFabricaMessage;
 @Path("/service")
 public class SolicitudCompraFabricaApp {
 
+	@EJB
+	ProductorFabricaMessage productor;
+	
 	@GET
-	@Path("/articulo")
+	@Path("/solicitudCompra")
 //	@Path("/{solicitudCompra}")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })
-	public String articulo(@DefaultValue("prueeeeba") @QueryParam("articulo") String json) {
+	public String solicitudCompra(@DefaultValue("prueeeeba") @QueryParam("solicitud") String json) {
 		
 		System.out.println(json.toString());
 		
@@ -36,8 +40,9 @@ public class SolicitudCompraFabricaApp {
 			Gson gson = new Gson ();
 			System.out.println("json: " + json.toString());
 			System.out.println("decoded: " + decodedValue1.toString());
-			ArticuloDTO articuloDTO = gson.fromJson(json, ArticuloDTO.class);
-			return articuloDTO.toString();
+			SolicitudCompraDTO solicitudCompraDTO = gson.fromJson(json, SolicitudCompraDTO.class);
+			productor.sendMessage(solicitudCompraDTO);
+			return solicitudCompraDTO.toString();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

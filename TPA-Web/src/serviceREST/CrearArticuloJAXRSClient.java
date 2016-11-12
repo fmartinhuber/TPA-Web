@@ -18,7 +18,7 @@ public class CrearArticuloJAXRSClient {
 	public static void conexion(ArticuloDTO articuloDTO){
 		
 		try {
-			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/articulo=?";
+			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/articulo?articulo=";
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();
 //			JsonObject jsonObject = new JsonObject();
 //			jsonObject.addProperty("codigo", articuloDTO);

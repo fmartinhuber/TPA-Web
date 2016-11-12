@@ -18,11 +18,11 @@ import dto.SolicitudCompraDTO;
 public class MockCrearArticuloJAXRSClient {
 
 	@GET
-	@Path("/solicitudCompra")
+	@Path("/articulo")
 //	@Path("/{solicitudCompra}")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })
-	public String solicitudCompra(@DefaultValue("prueeeeba") @QueryParam("solicitud") String json) {
+	public String articulo(@DefaultValue("prueeeeba") @QueryParam("articulo") String json) {
 		
 		System.out.println(json.toString());
 		
