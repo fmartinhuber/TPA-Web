@@ -21,7 +21,7 @@ public class SolicitudArticuloClient {
 	public static void conexion(SolicitudArticuloDTO solicitudArticuloDTO) {
 
 		try {
-			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulos?articulo=";
+			String URL = "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulos";
 			
 //			Gson prettyGson = new GsonBuilder().serializeNulls().create();
 			for (Iterator iterator = solicitudArticuloDTO.getItemsSolicitudArticulo().iterator(); iterator.hasNext();) {

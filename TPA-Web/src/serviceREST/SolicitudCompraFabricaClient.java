@@ -76,13 +76,6 @@ public class SolicitudCompraFabricaClient {
 			out.write(JSON.toString());
 			out.close();
 			
-			
-//			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-////			IOUtils.write("{\"id\" : \"1759\" , \"nombre\" : \"John Doe\" }", url.getOutputStream());
-//			if (urlConnection.getResponseCode() != 200) {
-//				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
-//			}
-			
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			
 			while (in.readLine() != null) {
