@@ -75,10 +75,7 @@ public class SolicitudCompraServlet extends HttpServlet {
 			}
 			//Cortamos el "-??" final y enviamos la respuesta
 			respuesta = respuesta.substring(0, respuesta.length()-3);
-			response.getWriter().write(respuesta);
-			
-			
-			
+			response.getWriter().write(respuesta);			
 		}
 		
 		
@@ -86,6 +83,7 @@ public class SolicitudCompraServlet extends HttpServlet {
 		
 		//----------------------------------------------------------------------------------------------------//
 		
+		//INGRESAR ARTICULOS A COMPRAR
 		if (request.getParameter("opcion").equalsIgnoreCase("ingresarArticulos")){
 			//Obtengo la solicitud a buscar
 			String cadenaStringSalida = request.getParameter("solicitudBuscada");
@@ -109,6 +107,16 @@ public class SolicitudCompraServlet extends HttpServlet {
 			response.getWriter().write(respuesta);
 		}
 		
+
+		
+		
+		
+		//----------------------------------------------------------------------------------------------------//
+		
+		//ENVIAR SOLICITUD DE COMPRA
+		if (request.getParameter("opcion").equalsIgnoreCase("ingresarArticulos")){
+			depositoEntregaArticulo.generarSolicitudCompra(cadenaStringSalida);		
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -59,6 +59,7 @@
 		});
 	});
 	
+
 	
 	//Tabla Articulos al momento de busqueda
 	$(document).ready(function() {
@@ -111,11 +112,21 @@
 				}
 				$('#ComprarArticulo tr').first().after(html);
 			});
-
 		});
 	});
 
 
+	
+	//Enviar Solicitud de Compra
+	$(document).ready(function() {
+		$("#realizarSolicitudCompra").click(function() {
+			var accion = "enviarSolicitudCompra";
+			
+			$.get("SolicitudCompraServlet", {opcion: accion}, function() {
+				alert("Solicitud de Compra creada correctamente");
+			});
+		});	
+	});
 	
 
 </script>
