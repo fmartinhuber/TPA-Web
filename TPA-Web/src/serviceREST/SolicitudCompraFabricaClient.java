@@ -66,7 +66,7 @@ public class SolicitudCompraFabricaClient {
 		URL url;
 		try {
 			url = new URL( "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/solicitud/solicitudCompra");
-			
+		
 			URLConnection connection = url.openConnection();
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Content-Type", "application/json");
