@@ -48,17 +48,18 @@
 		var accion = "obtSolPen";
 		$.get("SolicitudCompraServlet", {opcion: accion}, function(responseText) {
 			var obtenido = responseText;
-			var obtParseRow = obtenido.split("-??");
+			var obtParseRow = obtenido.split("-?");
 			$('#SolicitudArticulo tr').not(':first').remove();
 			var html = '';
 			for(var i=0; i < Object.keys(obtParseRow).length; i++){
-				var obtParseColumn = obtParseRow[i].split(";?");
+				var obtParseColumn = obtParseRow[i].split(";");
 				html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td></tr>';
 				}
 			$('#SolicitudArticulo tr').first().after(html);
 		});
 	});
 	
+
 	
 	//Tabla Articulos al momento de busqueda
 	$(document).ready(function() {
@@ -67,7 +68,7 @@
 			var valorSolBuscada = $('#solicitudSeleccionada').val();
 			$.get("SolicitudCompraServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
 				var obtenido = responseText;
-				var obtParseRow = obtenido.split("-??");
+				var obtParseRow = obtenido.split("-?");
 
 				//Si trajo datos muestro, sino alerta
 				if (obtenido.trim()){
@@ -77,7 +78,7 @@
 					$('#DetalleSolicitado tr').not(':first').remove();
 					var html = '';
 					for(var i=0; i < Object.keys(obtParseRow).length; i++){
-						var obtParseColumn = obtParseRow[i].split(";?");
+						var obtParseColumn = obtParseRow[i].split(";");
 						html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td><td>' + obtParseColumn[3] + 	'</td></tr>'; 
 					}
 					$('#DetalleSolicitado tr').first().after(html);
@@ -94,23 +95,38 @@
 	$(document).ready(function() {
 		$("#ingresarArt").click(function() {
 			var accion = "ingresarArticulos";
-			var valorSolBuscada = $('#solicitudSeleccionada').val();
-			var valorCompraArticulo =  $('#codCompraArticulo').val();
-			var valorCantAComprar = $('#cantAComprar').val();
-			$.get("SolicitudCompraServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
-				var obtenido = responseText;
-				var obtParseRow = obtenido.split("-??");
+			//Almaceno los 3 valores
+			var valorSolBuscada = $('#solicitudSeleccionada').val();	//CodigoSolicitud
+			var valorCompraArticulo =  $('#codCompraArticulo').val();	//CodigoArticulo
+			var valorCantAComprar = $('#cantAComprar').val();			//CantidadAComprar
 
+			$.get("SolicitudCompraServlet", {opcion: accion, solicitudBuscada: valorSolBuscada, articuloAComprar: valorCompraArticulo, cantidadAComprar: valorCantAComprar}, function(responseText) {
+				var obtenido = responseText;
+				var obtParseRow = obtenido.split("-?");
+
+				$('#ComprarArticulo tr').not(':first').remove();
+				var html = '';
 				for(var i=0; i < Object.keys(obtParseRow).length; i++){
-					var obtParseColumn = obtParseRow[i].split(";?");
-					html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td><td>' + obtParseColumn[3] + '</td><td>' + obtParseColumn[4] + '</td></tr>'; 
+					var obtParseColumn = obtParseRow[i].split(";");
+					html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td></tr>'; 
 				}
-				$('#DetalleSolicitado tr').first().after(html);	
+				$('#ComprarArticulo tr').first().after(html);
 			});
 		});
 	});
 
 
+	
+	//Enviar Solicitud de Compra
+	$(document).ready(function() {
+		$("#realizarSolicitudCompra").click(function() {
+			var accion = "enviarSolicitudCompra";
+			
+			$.get("SolicitudCompraServlet", {opcion: accion}, function() {
+				alert("Solicitud de Compra creada correctamente");
+			});
+		});	
+	});
 	
 
 </script>
@@ -178,8 +194,7 @@
 				 	Cantidad a comprar: <input type="text" name="cantAComprar" id="cantAComprar"><br>
 				 	<button type="button" id="ingresarArt" name="ingresarArt">Ingresar Articulo</button><br> 
 				 	
-				 	
-				 	<br><br>
+				 	<br>
 					Articulos Comprar
 			    	<table id=ComprarArticulo>
 			    		<tr>
@@ -188,10 +203,10 @@
 			    			<td>Cantidad</td>
 			    		</tr>
 			    	</table>
-			    	<br><br>
+			    	<br><br><br>
 				 	
 				 	<button type="button" id="realizarSolicitudCompra" name="realizarSolicitudCompra">Realizar Solicitud de Compra</button><br> 
-				 	
+				 	<br><br>
 				 	
 			    	
     		</div><!-- /row -->

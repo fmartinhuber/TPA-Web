@@ -21,7 +21,10 @@ public class SolicitudCompraServlet extends HttpServlet {
 	IEntregaArticuloControladorLocal depositoEntregaArticulo;
 	
 	private static final long serialVersionUID = 1L;
-       
+	
+	//Este Array se va a ir cargando por cada row de la tabla de Articulos a Comprar
+	private List<String> cadenaStringSalida = new ArrayList<String>();
+	
     public SolicitudCompraServlet() {
 
     }
@@ -41,13 +44,13 @@ public class SolicitudCompraServlet extends HttpServlet {
 			List<SolicitudArticuloDTO> solisArtDto = new ArrayList<SolicitudArticuloDTO>();
 			solisArtDto = depositoEntregaArticulo.listarSolicitudesPendientes();
 			
-			//Formateo la salida parseando columnas con ";?" y filas con "-??"
+			//Formateo la salida parseando columnas con ";" y filas con "-?"
 			String respuesta = "";
 			for (SolicitudArticuloDTO s : solisArtDto){
-				respuesta += s.getCodigo() + ";?" + s.getFechaEntrega() + "-??";
+				respuesta += s.getCodigo() + ";" + s.getFechaEntrega() + "-?";
 			}
-			//Cortamos el "-??" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			//Cortamos el "-?" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
 		}
 		
@@ -65,18 +68,65 @@ public class SolicitudCompraServlet extends HttpServlet {
 			List<ItemSolicitudArticuloDTO> itemSolArtDto = new ArrayList<ItemSolicitudArticuloDTO>();
 			itemSolArtDto = depositoEntregaArticulo.obtenerItemDeSolicitud(solicitudABuscar);
 			
-			//Formateo la salida parseando columnas con ";?" y filas con "-??"
+			//Formateo la salida parseando columnas con ";" y filas con "-?"
 			String respuesta = "";
 			for (ItemSolicitudArticuloDTO i : itemSolArtDto){
-				respuesta += i.getArticulo().getCodArticulo() +  ";?" + i.getArticulo().getNombre() + ";?" + i.getArticulo().getDescripcion() + ";?" + i.getCantidad() + "-??";
+				respuesta += i.getArticulo().getCodArticulo() +  ";" + i.getArticulo().getNombre() + ";" + i.getArticulo().getDescripcion() + ";" + i.getCantidad() + "-?";
 			}
-			//Cortamos el "-??" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			//Cortamos el "-" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-2);
+			response.getWriter().write(respuesta);			
+		}
+		
+		
+		
+		
+		//----------------------------------------------------------------------------------------------------//
+		
+		//INGRESAR ARTICULOS A COMPRAR
+		if (request.getParameter("opcion").equalsIgnoreCase("ingresarArticulos")){
+			//Obtengo la solicitud a buscar
+			String cadenaStringSalida = request.getParameter("solicitudBuscada");
+			//Obtengo el articulo a ser comprado
+			String articuloAComprar = request.getParameter("articuloAComprar");
+			//Obtengo la cantidad a ser comprada
+			String cantidadAComprar = request.getParameter("cantidadAComprar");
+			
+			//Armo cadena a ser enviada y la guardo en el array
+			String cadenaRow = cadenaStringSalida + ";" + articuloAComprar + ";" + cantidadAComprar;
+			List<String> cadenaLocal = new ArrayList<String>();
+			cadenaLocal = agregarRow(cadenaRow);
+			
+			//Armo la respuesta parseando la cadena a imprimir
+			String respuesta = "";
+			for (String s : cadenaLocal){
+				respuesta = respuesta + s + "-?";
+			}
+			//Cortamos el "-" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
 		}
 		
+
+		
+		
+		
+		//----------------------------------------------------------------------------------------------------//
+		
+		//ENVIAR SOLICITUD DE COMPRA
+		if (request.getParameter("opcion").equalsIgnoreCase("enviarSolicitudCompra")){
+			depositoEntregaArticulo.generarSolicitudCompra(cadenaStringSalida);		
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	
+	private List<String> agregarRow (String cadena){
+		cadenaStringSalida.add(cadena);
+		return cadenaStringSalida;
+	}
 
 }
