@@ -182,7 +182,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			
 			//Mandar JSON
 			SolicitudArticuloDTO miSolArtDto = new SolicitudArticuloDTO();
-			miSolArtDto = depositoEntregaArticulo.enviarJSON(solicitudABuscar);
+			miSolArtDto = depositoEntregaArticulo.obtenerSolicitudAEnviarADespacho(solicitudABuscar);
 			//MAR, ACA TENES QUE MANDAR MISOLARTDTO POR JSON A DESPACHO
 			SolicitudArticuloClient.conexion(miSolArtDto);
 			
