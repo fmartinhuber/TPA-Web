@@ -2,14 +2,9 @@ package serviceMessages;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
@@ -19,6 +14,9 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.artemis.utils.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
@@ -54,6 +52,7 @@ public class ReceptorSolicitudArticuloMessage implements MessageListener {
 			String messageText = null;
 			if(message instanceof TextMessage){
 				messageText = ((TextMessage)message).getText();
+				System.out.println(messageText);
 				JSONObject json = new JSONObject(messageText);
 				ArticuloDTO articulo = deposito.obtenerArticuloPorCodigo(json.getString("codArticulo"));
 				SolicitudArticuloDTO solicitud = new SolicitudArticuloDTO();

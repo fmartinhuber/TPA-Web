@@ -44,14 +44,17 @@ public class SolicitudCompraServlet extends HttpServlet {
 			List<SolicitudArticuloDTO> solisArtDto = new ArrayList<SolicitudArticuloDTO>();
 			solisArtDto = depositoEntregaArticulo.listarSolicitudesPendientes();
 			
-			//Formateo la salida parseando columnas con ";?" y filas con "-??"
+			//Formateo la salida parseando columnas con ";" y filas con "-?"
 			String respuesta = "";
 			for (SolicitudArticuloDTO s : solisArtDto){
-				respuesta += s.getCodigo() + ";?" + s.getFechaEntrega() + "-??";
+				respuesta += s.getCodigo() + ";" + s.getFechaEntrega() + "-?";
 			}
-			//Cortamos el "-??" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			//Cortamos el "-?" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
+			
+			//Como se accede a este metodo al momento de abrir la pagina, blanqueamos el vector acumulado
+			cadenaStringSalida.clear();
 		}
 		
 		
@@ -68,13 +71,13 @@ public class SolicitudCompraServlet extends HttpServlet {
 			List<ItemSolicitudArticuloDTO> itemSolArtDto = new ArrayList<ItemSolicitudArticuloDTO>();
 			itemSolArtDto = depositoEntregaArticulo.obtenerItemDeSolicitud(solicitudABuscar);
 			
-			//Formateo la salida parseando columnas con ";?" y filas con "-??"
+			//Formateo la salida parseando columnas con ";" y filas con "-?"
 			String respuesta = "";
 			for (ItemSolicitudArticuloDTO i : itemSolArtDto){
-				respuesta += i.getArticulo().getCodArticulo() +  ";?" + i.getArticulo().getNombre() + ";?" + i.getArticulo().getDescripcion() + ";?" + i.getCantidad() + "-??";
+				respuesta += i.getArticulo().getCodArticulo() +  ";" + i.getArticulo().getNombre() + ";" + i.getArticulo().getDescripcion() + ";" + i.getCantidad() + "-?";
 			}
-			//Cortamos el "-??" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			//Cortamos el "-" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);			
 		}
 		
@@ -93,17 +96,17 @@ public class SolicitudCompraServlet extends HttpServlet {
 			String cantidadAComprar = request.getParameter("cantidadAComprar");
 			
 			//Armo cadena a ser enviada y la guardo en el array
-			String cadenaRow = cadenaStringSalida + ";?" + articuloAComprar + ";?" + cantidadAComprar;
+			String cadenaRow = cadenaStringSalida + ";" + articuloAComprar + ";" + cantidadAComprar;
 			List<String> cadenaLocal = new ArrayList<String>();
 			cadenaLocal = agregarRow(cadenaRow);
 			
 			//Armo la respuesta parseando la cadena a imprimir
 			String respuesta = "";
 			for (String s : cadenaLocal){
-				respuesta = respuesta + s + "-??";
+				respuesta = respuesta + s + "-?";
 			}
-			//Cortamos el "-??" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			//Cortamos el "-" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
 		}
 		
