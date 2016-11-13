@@ -52,6 +52,9 @@ public class SolicitudCompraServlet extends HttpServlet {
 			//Cortamos el "-?" final y enviamos la respuesta
 			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
+			
+			//Como se accede a este metodo al momento de abrir la pagina, blanqueamos el vector acumulado
+			cadenaStringSalida.clear();
 		}
 		
 		
