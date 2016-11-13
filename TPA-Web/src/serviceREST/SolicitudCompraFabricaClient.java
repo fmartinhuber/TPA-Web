@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
@@ -78,11 +77,11 @@ public class SolicitudCompraFabricaClient {
 			out.close();
 			
 			
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//			IOUtils.write("{\"id\" : \"1759\" , \"nombre\" : \"John Doe\" }", url.getOutputStream());
-			if (urlConnection.getResponseCode() != 200) {
-				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
-			}
+//			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+////			IOUtils.write("{\"id\" : \"1759\" , \"nombre\" : \"John Doe\" }", url.getOutputStream());
+//			if (urlConnection.getResponseCode() != 200) {
+//				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
+//			}
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			
