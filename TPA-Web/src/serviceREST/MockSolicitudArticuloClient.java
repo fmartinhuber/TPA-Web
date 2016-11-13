@@ -1,5 +1,6 @@
 package serviceREST;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -10,19 +11,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
 import dto.SolicitudCompraDTO;
 
+@Path("/articulo")
 public class MockSolicitudArticuloClient {
 
 	@GET
-	@Path("/solicitudCompra")
+	@Path("/solicitudArticulo")
 //	@Path("/{solicitudCompra}")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })
-	public String solicitudCompra(@DefaultValue("prueeeeba") @QueryParam("solicitud") String json) {
+	public String solicitudCompra(@DefaultValue("prueeeeba") @QueryParam("articulo") String json) {
 		
 		System.out.println(json.toString());
 		
@@ -37,5 +41,15 @@ public class MockSolicitudArticuloClient {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	@GET
+	@Path("/verify")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response verifyRESTService(InputStream incomingData) {
+		String result = "CrunchifyRESTService Successfully started..";
+ 
+		// return HTTP response 200 in case of success
+		return Response.status(200).entity(result).build();
 	}
 }
