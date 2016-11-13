@@ -46,7 +46,7 @@
 	//Tabla Solicitudes de Articulos al iniciar la pagina
 	$(document).ready(function(){
 		var accion = "obtSolPen";
-		$.get("EntregaArticuloServlet", {opcion: accion}, function(responseText) {
+		$.get("SolicitudCompraServlet", {opcion: accion}, function(responseText) {
 			var obtenido = responseText;
 			var obtParseRow = obtenido.split("-??");
 			$('#SolicitudArticulo tr').not(':first').remove();
@@ -65,20 +65,20 @@
 		$("#obtArticulos").click(function() {
 			var accion = "obtArticulos";
 			var valorSolBuscada = $('#solicitudSeleccionada').val();
-			$.get("EntregaArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
+			$.get("SolicitudCompraServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
 				var obtenido = responseText;
 				var obtParseRow = obtenido.split("-??");
-	
+
 				//Si trajo datos muestro, sino alerta
 				if (obtenido.trim()){
 					//Seteo la solicitud utilizada como informacion en textfield disabled
 					$("#solicitudMuestra").val(valorSolBuscada);
-	
+
 					$('#DetalleSolicitado tr').not(':first').remove();
 					var html = '';
 					for(var i=0; i < Object.keys(obtParseRow).length; i++){
 						var obtParseColumn = obtParseRow[i].split(";?");
-						html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td><td>' + obtParseColumn[3] + '</td><td>' + obtParseColumn[4] + '</td></tr>'; 
+						html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td><td>' + obtParseColumn[3] + 	'</td></tr>'; 
 					}
 					$('#DetalleSolicitado tr').first().after(html);
 				}else{
@@ -87,6 +87,29 @@
 			});
 		});
 	});
+	
+
+
+	//Cargar Articulo
+	$(document).ready(function() {
+		$("#ingresarArt").click(function() {
+			var accion = "ingresarArticulos";
+			var valorSolBuscada = $('#solicitudSeleccionada').val();
+			var valorCompraArticulo =  $('#codCompraArticulo').val();
+			var valorCantAComprar = $('#cantAComprar').val();
+
+			//ACA RECIBIR EL PUTO ARRAY PARSEADO Y MOSTRARLO
+			
+			html += '<tr><td>' + valorSolBuscada + '</td><td>' + valorCompraArticulo + '</td><td>' + valorCantAComprar + '</td><td>'; 
+			
+			$('#DetalleSolicitado tr').first().after(html);
+			
+			});
+		});
+	});
+
+
+	
 
 </script>
   
@@ -119,7 +142,7 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-			    			    	
+			    	
 			    	Solicitud de Articulos
 			    	<table id=SolicitudArticulo>
 			    		<tr>
@@ -140,7 +163,6 @@
 				 			<td>Nombre</td>
 				 			<td>Descripcion</td>
 				 			<td>Cantidad</td>
-				 			<td>Cumplimiento</td>
 				 		</tr>
 				 	</table>
 				 	
@@ -151,11 +173,22 @@
 				 	<h4>Seleccionar Articulos a Comprar</h4>
 				 	
 				 	Codigo Articulo: <input type="text" name="codCompraArticulo" id="codCompraArticulo">
-				 	<button type="button" id="obtenerCodigoArt" name="obtenerCodigoArt">Obtener Articulo</button><br> 
-				 	Cantidad recomendada a comprar: <input type="text" name="cantRecomendada" id="cantRecomendada" disabled readonly><br>
 				 	Cantidad a comprar: <input type="text" name="cantAComprar" id="cantAComprar"><br>
+				 	<button type="button" id="ingresarArt" name="ingresarArt">Ingresar Articulo</button><br> 
 				 	
 				 	
+				 	<br><br>
+					Articulos Comprar
+			    	<table id=ComprarArticulo>
+			    		<tr>
+			    			<td>Codigo Solicitud</td>
+			    			<td>Codigo Articulo</td>
+			    			<td>Cantidad</td>
+			    		</tr>
+			    	</table>
+			    	<br><br>
+				 	
+				 	<button type="button" id="realizarSolicitudCompra" name="realizarSolicitudCompra">Realizar Solicitud de Compra</button><br> 
 				 	
 				 	
 			    	
