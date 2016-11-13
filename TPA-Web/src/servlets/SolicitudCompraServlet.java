@@ -114,7 +114,7 @@ public class SolicitudCompraServlet extends HttpServlet {
 		//----------------------------------------------------------------------------------------------------//
 		
 		//ENVIAR SOLICITUD DE COMPRA
-		if (request.getParameter("opcion").equalsIgnoreCase("ingresarArticulos")){
+		if (request.getParameter("opcion").equalsIgnoreCase("enviarSolicitudCompra")){
 			depositoEntregaArticulo.generarSolicitudCompra(cadenaStringSalida);		
 		}
 	}
