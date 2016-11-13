@@ -14,6 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.gson.Gson;
+
+import dto.SolicitudCompraDTO;
 import serviceMessages.ProductorFabricaMessage;
 
 @Path("/solicitud")
@@ -35,6 +38,12 @@ public class SolicitudCompraFabricaApp {
 			while ((line = in.readLine()) != null) {
 				crunchifyBuilder.append(line);
 			}
+			Gson gson = new Gson ();
+			String json = crunchifyBuilder.toString();
+			System.out.println("json: " + json.toString());
+			SolicitudCompraDTO solicitudCompraDTO = gson.fromJson(json, SolicitudCompraDTO.class);
+			productor.sendMessage(solicitudCompraDTO);
+			return solicitudCompraDTO.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

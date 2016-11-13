@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import controler.IEntregaArticuloControladorLocal;
 import dto.*;
 import serviceREST.CrearArticuloClient;
+import serviceREST.SolicitudCompraFabricaClient;
 
 @WebServlet("/SolicitudCompraServlet")
 public class SolicitudCompraServlet extends HttpServlet {
@@ -119,8 +120,8 @@ public class SolicitudCompraServlet extends HttpServlet {
 		
 		//ENVIAR SOLICITUD DE COMPRA
 		if (request.getParameter("opcion").equalsIgnoreCase("enviarSolicitudCompra")){
-			depositoEntregaArticulo.generarSolicitudCompra(cadenaStringSalida);		
-//			CrearArticuloClient.conexion(articuloDTO);
+			SolicitudCompraDTO solicitud = depositoEntregaArticulo.generarSolicitudCompra(cadenaStringSalida);		
+			SolicitudCompraFabricaClient.conexion(solicitud);
 		}
 	}
 
