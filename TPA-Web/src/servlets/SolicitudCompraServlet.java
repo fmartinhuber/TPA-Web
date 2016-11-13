@@ -50,7 +50,7 @@ public class SolicitudCompraServlet extends HttpServlet {
 				respuesta += s.getCodigo() + ";" + s.getFechaEntrega() + "-?";
 			}
 			//Cortamos el "-?" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
 		}
 		
@@ -74,7 +74,7 @@ public class SolicitudCompraServlet extends HttpServlet {
 				respuesta += i.getArticulo().getCodArticulo() +  ";" + i.getArticulo().getNombre() + ";" + i.getArticulo().getDescripcion() + ";" + i.getCantidad() + "-?";
 			}
 			//Cortamos el "-" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);			
 		}
 		
@@ -103,7 +103,7 @@ public class SolicitudCompraServlet extends HttpServlet {
 				respuesta = respuesta + s + "-?";
 			}
 			//Cortamos el "-" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-3);
+			respuesta = respuesta.substring(0, respuesta.length()-2);
 			response.getWriter().write(respuesta);
 		}
 		
