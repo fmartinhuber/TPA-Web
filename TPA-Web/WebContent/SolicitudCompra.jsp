@@ -94,17 +94,24 @@
 	$(document).ready(function() {
 		$("#ingresarArt").click(function() {
 			var accion = "ingresarArticulos";
-			var valorSolBuscada = $('#solicitudSeleccionada').val();
-			var valorCompraArticulo =  $('#codCompraArticulo').val();
-			var valorCantAComprar = $('#cantAComprar').val();
+			//Almaceno los 3 valores
+			var valorSolBuscada = $('#solicitudSeleccionada').val();	//CodigoSolicitud
+			var valorCompraArticulo =  $('#codCompraArticulo').val();	//CodigoArticulo
+			var valorCantAComprar = $('#cantAComprar').val();			//CantidadAComprar
 
-			//ACA RECIBIR EL PUTO ARRAY PARSEADO Y MOSTRARLO
-			
-			html += '<tr><td>' + valorSolBuscada + '</td><td>' + valorCompraArticulo + '</td><td>' + valorCantAComprar + '</td><td>'; 
-			
-			$('#DetalleSolicitado tr').first().after(html);
-			
+			$.get("SolicitudCompraServlet", {opcion: accion, solicitudBuscada: valorSolBuscada, articuloAComprar: valorCompraArticulo, cantidadAComprar: valorCantAComprar}, function(responseText) {
+				var obtenido = responseText;
+				var obtParseRow = obtenido.split("-??");
+
+				$('#ComprarArticulo tr').not(':first').remove();
+				var html = '';
+				for(var i=0; i < Object.keys(obtParseRow).length; i++){
+					var obtParseColumn = obtParseRow[i].split(";?");
+					html += '<tr><td>' + obtParseColumn[0] + '</td><td>' + obtParseColumn[1] + '</td><td>' + obtParseColumn[2] + '</td></tr>'; 
+				}
+				$('#ComprarArticulo tr').first().after(html);
 			});
+
 		});
 	});
 
@@ -176,8 +183,7 @@
 				 	Cantidad a comprar: <input type="text" name="cantAComprar" id="cantAComprar"><br>
 				 	<button type="button" id="ingresarArt" name="ingresarArt">Ingresar Articulo</button><br> 
 				 	
-				 	
-				 	<br><br>
+				 	<br>
 					Articulos Comprar
 			    	<table id=ComprarArticulo>
 			    		<tr>
@@ -186,7 +192,7 @@
 			    			<td>Cantidad</td>
 			    		</tr>
 			    	</table>
-			    	<br><br>
+			    	<br><br><br>
 				 	
 				 	<button type="button" id="realizarSolicitudCompra" name="realizarSolicitudCompra">Realizar Solicitud de Compra</button><br> 
 				 	
