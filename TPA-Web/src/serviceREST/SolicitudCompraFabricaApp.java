@@ -35,6 +35,7 @@ public class SolicitudCompraFabricaApp {
 			while ((line = in.readLine()) != null) {
 				crunchifyBuilder.append(line);
 			}
+			System.out.println("LLEGO: " + crunchifyBuilder.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
