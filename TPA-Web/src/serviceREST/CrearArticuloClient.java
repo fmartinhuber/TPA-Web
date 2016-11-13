@@ -10,6 +10,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,10 +27,17 @@ public class CrearArticuloClient {
 				
 		
 		try {
-			URL url = new URL("http://192.168.1.45:8080/WebStock/rest/despacho/recibirArticulos");
-			Gson prettyGson = new GsonBuilder().serializeNulls().create();
-//			JsonObject jsonObject = new JsonObject();
-//			jsonObject.addProperty("codigo", articuloDTO);
+			URL url = new URL("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/crearArticulo");
+//			Gson prettyGson = new GsonBuilder().serializeNulls().create();
+			JsonObject jsonObject = new JsonObject();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			String date = sdf.format(new Date());
+			LocalDateTime dateTime = LocalDateTime.parse("2016-03-23T18:21");
+			jsonObject.addProperty("fecha", date);
+			jsonObject.addProperty("tipo", "Deposito");
+			jsonObject.addProperty("modulo", "G12");
+			jsonObject.addProperty("descripcion", "Se dio de alta el Articulo " + articuloDTO.getCodArticulo());
+			
 //			System.out.println("JsonObject: " + JsonObject.toString());
 //			String JSON = prettyGson.toJson(articuloDTO);
 //			System.out.println("JSON: " + JSON.toString());
@@ -41,7 +52,7 @@ public class CrearArticuloClient {
 			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
 			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-			String JSON = prettyGson.toJson(articuloDTO);
+			String JSON = jsonObject.toString();
 			out.write(JSON.toString());
 			out.close();
 			

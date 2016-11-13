@@ -64,7 +64,7 @@ public class SolicitudCompraFabricaClient {
 		Gson prettyGson = new GsonBuilder().serializeNulls().create();
 		URL url;
 		try {
-			url = new URL( "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/solicitud/solicitudCompra");
+			url = new URL( "http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/solicitud/solicitudCompra");
 		
 			URLConnection connection = url.openConnection();
 			connection.setDoOutput(true);
