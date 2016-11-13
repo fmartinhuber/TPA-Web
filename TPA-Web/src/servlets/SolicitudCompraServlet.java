@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,8 @@ public class SolicitudCompraServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<String> cadenaStringSalida = new ArrayList<String>();
+	//Este Array se va a ir cargando por cada row de la tabla de Articulos a Comprar
+	private List<String> cadenaStringSalida = new ArrayList<String>();
 	
     public SolicitudCompraServlet() {
 
@@ -87,15 +87,38 @@ public class SolicitudCompraServlet extends HttpServlet {
 		//----------------------------------------------------------------------------------------------------//
 		
 		if (request.getParameter("opcion").equalsIgnoreCase("ingresarArticulos")){
-
-			//ACA IR CAGANDO EL FUCKING ARRAY CON LOS CODIGOSOL;CODIGOART;CANT, Y DESPUES DAR RESPUESTA AL
-			//SERVLET PARSEADO COMO ANTES
+			//Obtengo la solicitud a buscar
+			String cadenaStringSalida = request.getParameter("solicitudBuscada");
+			//Obtengo el articulo a ser comprado
+			String articuloAComprar = request.getParameter("articuloAComprar");
+			//Obtengo la cantidad a ser comprada
+			String cantidadAComprar = request.getParameter("cantidadAComprar");
 			
+			//Armo cadena a ser enviada y la guardo en el array
+			String cadenaRow = cadenaStringSalida + ";?" + articuloAComprar + ";?" + cantidadAComprar;
+			List<String> cadenaLocal = new ArrayList<String>();
+			cadenaLocal = agregarRow(cadenaRow);
+			
+			//Armo la respuesta parseando la cadena a imprimir
+			String respuesta = "";
+			for (String s : cadenaLocal){
+				respuesta = respuesta + s + "-??";
+			}
+			//Cortamos el "-??" final y enviamos la respuesta
+			respuesta = respuesta.substring(0, respuesta.length()-3);
+			response.getWriter().write(respuesta);
 		}
-		
 		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	
+	private List<String> agregarRow (String cadena){
+		cadenaStringSalida.add(cadena);
+		return cadenaStringSalida;
+	}
 
 }
