@@ -85,12 +85,14 @@ public class CrearArticuloServlet extends HttpServlet {
 		newArticulo.setTalle(request.getParameter("talle"));
 		
 		
-//		deposito.crearArticulo(newArticulo);
-		Gson prettyGson = new GsonBuilder().serializeNulls().create();
-		String JSON = prettyGson.toJson(newArticulo); 
-		//CrearArticuloClient.conexion(newArticulo);
-		CrearArticuloClient.conexion(newArticulo);
+		deposito.crearArticulo(newArticulo);
+		
+//		Gson prettyGson = new GsonBuilder().serializeNulls().create();
+//		String JSON = prettyGson.toJson(newArticulo); 
+//
+//		CrearArticuloClient.conexion(newArticulo);
 //		PruebaDespachoQueue.prueba("prueeeeeeeeeeeeeeba");
+		
 		response.getWriter().print("<h1> Se creó el artículo de tipo " +newArticulo.getTipo()+"<h1>");		
 		response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");		
 					
