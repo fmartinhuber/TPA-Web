@@ -51,25 +51,10 @@ public class ReceptorSolicitudArticuloMessage implements MessageListener {
 			String messageText = null;
 			if(message instanceof TextMessage){
 				messageText = ((TextMessage)message).getText();
-				System.out.println(messageText);
-				JsonObject json = new Gson().fromJson(messageText, JsonObject.class);
 				
+				//En 1 hora lo que debiste haber hecho en 4 meses
+				deposito.crearSolicitudArticulo(messageText);
 				
-				ArticuloDTO articulo = deposito.obtenerArticuloPorCodigo(json.get("codArticulo").toString());
-				if(articulo != null){
-					SolicitudArticuloDTO solicitud = new SolicitudArticuloDTO();
-					solicitud.setCodigo(articulo.getCodArticulo());
-					solicitud.setEstado("Pendiente");
-					solicitud.setFechaEntrega(new Date(2016,12,31));
-					solicitud.setIdModulo(json.get("idDespacho").toString());
-					ItemSolicitudArticuloDTO itemSolArt = new ItemSolicitudArticuloDTO(articulo,Integer.parseInt(json.get("cantidad").toString()));
-					List<ItemSolicitudArticuloDTO> listaArt = new ArrayList<ItemSolicitudArticuloDTO>();
-					listaArt.add(itemSolArt);
-					solicitud.setItemsSolicitudArticulo(listaArt);
-					deposito.crearSolicitudArticulo(solicitud);
-				}else{
-					System.out.println("MANDE UN ARTICULO COMO LA GENTE !");
-				}
 			}
 			Logger.getAnonymousLogger().info("Mensaje recibido: " + messageText);
 		} catch (Exception e) {
