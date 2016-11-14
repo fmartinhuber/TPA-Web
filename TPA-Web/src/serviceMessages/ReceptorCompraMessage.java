@@ -47,6 +47,7 @@ public class ReceptorCompraMessage implements MessageListener {
 			if(objectData instanceof SolicitudCompraDTO){
 				SolicitudCompraDTO solCompraDTO = (SolicitudCompraDTO) objectData;
 				ejb.crearRecepcionCompra(solCompraDTO);
+				ejb.actualizarEstadoSolicitudCompra(solCompraDTO);
 			}
 			
 		} catch (Exception e) {
