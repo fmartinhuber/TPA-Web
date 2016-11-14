@@ -27,7 +27,7 @@ public class ProductorSolicitudArticuloMessage {
 
 	public void sendMessage() {
 //		JMSContext c = new ActiveMQXAJMSContext(,context); 
-		String json = "{\"idDespacho\":\"G05\", \"codArticulo\":1234, \"cantidad\":4}";
+		String json = "{\"idDespacho\":\"G05\", \"codArticulo\":101, \"cantidad\":4}";
 		Message message = context.createTextMessage(json);
 		context.createProducer().send(testQueue, message);
 	}

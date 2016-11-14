@@ -13,7 +13,6 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
-import org.apache.activemq.artemis.utils.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -53,18 +52,24 @@ public class ReceptorSolicitudArticuloMessage implements MessageListener {
 			if(message instanceof TextMessage){
 				messageText = ((TextMessage)message).getText();
 				System.out.println(messageText);
-				JSONObject json = new JSONObject(messageText);
-				ArticuloDTO articulo = deposito.obtenerArticuloPorCodigo(json.getString("codArticulo"));
-				SolicitudArticuloDTO solicitud = new SolicitudArticuloDTO();
-				solicitud.setCodigo(articulo.getCodArticulo());
-				solicitud.setEstado("Pendiente");
-				solicitud.setFechaEntrega(new Date(2016,12,31));
-				solicitud.setIdModulo(json.getString("idDespacho"));
-				ItemSolicitudArticuloDTO itemSolArt = new ItemSolicitudArticuloDTO(articulo,Integer.parseInt(json.getString("cantidad")));
-				List<ItemSolicitudArticuloDTO> listaArt = new ArrayList<ItemSolicitudArticuloDTO>();
-				listaArt.add(itemSolArt);
-				solicitud.setItemsSolicitudArticulo(listaArt);
-				deposito.crearSolicitudArticulo(solicitud);
+				JsonObject json = new Gson().fromJson(messageText, JsonObject.class);
+				
+				
+				ArticuloDTO articulo = deposito.obtenerArticuloPorCodigo(json.get("codArticulo").toString());
+				if(articulo != null){
+					SolicitudArticuloDTO solicitud = new SolicitudArticuloDTO();
+					solicitud.setCodigo(articulo.getCodArticulo());
+					solicitud.setEstado("Pendiente");
+					solicitud.setFechaEntrega(new Date(2016,12,31));
+					solicitud.setIdModulo(json.get("idDespacho").toString());
+					ItemSolicitudArticuloDTO itemSolArt = new ItemSolicitudArticuloDTO(articulo,Integer.parseInt(json.get("cantidad").toString()));
+					List<ItemSolicitudArticuloDTO> listaArt = new ArrayList<ItemSolicitudArticuloDTO>();
+					listaArt.add(itemSolArt);
+					solicitud.setItemsSolicitudArticulo(listaArt);
+					deposito.crearSolicitudArticulo(solicitud);
+				}else{
+					System.out.println("MANDE UN ARTICULO COMO LA GENTE !");
+				}
 			}
 			Logger.getAnonymousLogger().info("Mensaje recibido: " + messageText);
 		} catch (Exception e) {
