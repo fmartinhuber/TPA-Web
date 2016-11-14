@@ -16,13 +16,13 @@ import java.io.IOException;
 
 public class WildFlyJmsQueueSender {
 	public final static String JMS_CONNECTION_FACTORY_JNDI = "java:jboss/exported/jms/RemoteConnectionFactory";
-	public final static String JMS_QUEUE_JNDI = "jms/queue/ColaDeposito";
-	public final static String JMS_USERNAME = "coladeposito"; // The role for
+	public final static String JMS_QUEUE_JNDI = "jms/queue/solicitudArticuloProductor";
+	public final static String JMS_USERNAME = "test"; // The role for
 																// this user is
 																// "guest" in
 																// ApplicationRealm
-	public final static String JMS_PASSWORD = "Password123";
-	public final static String WILDFLY_REMOTING_URL = "http-remoting://172.20.10.3:8080";
+	public final static String JMS_PASSWORD = "test1234";
+	public final static String WILDFLY_REMOTING_URL = "http-remoting://192.168.0.21:8080";
 
 	private QueueConnectionFactory qconFactory;
 	private QueueConnection qcon;

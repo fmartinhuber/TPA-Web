@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import serviceMessages.ProductorSolicitudArticuloMessage;
+import serviceMessages.ServiceMensajeria;
 
 /**
  * Servlet implementation class daroServlet
@@ -36,6 +37,7 @@ public class maxiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		ServiceMensajeria asd = new ServiceMensajeria();
 		productor.sendMessage();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
