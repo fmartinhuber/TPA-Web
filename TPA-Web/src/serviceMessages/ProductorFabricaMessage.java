@@ -20,7 +20,7 @@ public class ProductorFabricaMessage {
 //	@Resource(lookup = "java:/jms/queue/solicitudArticuloProductor")
 	@Resource(lookup = "java:/jms/queue/recepcionCompra")
 	private Queue testQueue;
-
+ 
 	@Inject
 	@JMSConnectionFactory("java:jboss/DefaultJMSConnectionFactory")
 	private JMSContext context;
