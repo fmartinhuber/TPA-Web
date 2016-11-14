@@ -98,4 +98,80 @@ public class CrearArticuloClient {
 		}
 		
 	}
+	
+	/*
+	 * {
+  "idDeposito": "Gxx",
+  "codArticulo": 1234,
+  "nombre": "Radio Electrico",
+  "descripcion": "Radio Electrico 700w",
+  "marca": "Phillips",
+  "precio": 1500.0,
+  "foto": "http://imgur.com/123456",
+  "origen": "China",
+  "tipo": "Electro",
+  "datosExtra": {
+    "fichaTecnica": "una ficha tecnica en texto libre"
+  }  
+}
+	 * 
+	 */
+	
+	public static void conexionDespacho(ArticuloDTO articuloDTO){			
+		
+		try {
+			URL url = new URL("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/crearArticulo");
+//			Gson prettyGson = new GsonBuilder().serializeNulls().create();
+			JsonObject jsonObject = new JsonObject();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			String date = sdf.format(new Date());
+			jsonObject.addProperty("modulo", "G12");
+			jsonObject.addProperty("codigo", articuloDTO.getCodArticulo());
+			jsonObject.addProperty("nombre", articuloDTO.getNombre());	
+			jsonObject.addProperty("descripcion", articuloDTO.getDescripcion());
+			jsonObject.addProperty("marca", articuloDTO.getMarca());
+			jsonObject.addProperty("precio", articuloDTO.getPrecio());
+			jsonObject.addProperty("foto", articuloDTO.getFoto());
+			jsonObject.addProperty("origen", articuloDTO.getOrigen());
+			jsonObject.addProperty("tipo", articuloDTO.getTipo());
+			
+			//jsonObject.addProperty("datosExtra", );
+			
+//			System.out.println("JsonObject: " + JsonObject.toString());
+//			String JSON = prettyGson.toJson(articuloDTO);
+//			System.out.println("JSON: " + JSON.toString());
+//			URL url;
+//			String ecodedValue1  = URLEncoder.encode(JSON.toString(), StandardCharsets.UTF_8.name());
+//			System.out.println("URL: " + URL + ecodedValue1 );
+			
+
+			URLConnection connection = url.openConnection();
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setConnectTimeout(5000);
+			connection.setReadTimeout(5000);
+			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+			String JSON = jsonObject.toString();
+			out.write(JSON.toString());
+			out.close();
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			
+//			if (urlConnection.getResponseCode() != 200) {
+//				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
+//			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }
