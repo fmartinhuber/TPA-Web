@@ -17,9 +17,7 @@ public class ClientMensajeria {
 
 	// Set up all the default values
 	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-//	private static final String DEFAULT_CONNECTION_FACTORY = "java:jboss/exported/jms/RemoteConnectionFactory";
 	private static final String TEST_QUEUE_DESTINATION = "jms/queue/recepcion_fabrica_queue";
-	// private static final String BARBA_QUEUE_DESTINATION = "jms/queue/barba";
 
 	private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
 
@@ -82,6 +80,9 @@ public class ClientMensajeria {
 		jndiProps.put(Context.PROVIDER_URL, this.getProviderUrl());
 		jndiProps.put(Context.SECURITY_PRINCIPAL, this.getUserName());
 		jndiProps.put(Context.SECURITY_CREDENTIALS, this.getPassword());
+		System.out.println(">>>>>>>>getProviderUrl: " + getProviderUrl());
+		System.out.println(">>>>>>>>getUserName: " + getUserName());
+		System.out.println(">>>>>>>>getPassword: " + getPassword());
 		return jndiProps;
 	}
 
@@ -96,6 +97,7 @@ public class ClientMensajeria {
 	}
 
 	public void sendMessage(String message) throws Exception {
+		System.out.println(">>>>>>>>>>getQueueName: " + getQueueName());
 		Context context = new InitialContext(buildJndiProperties());
 		Connection connection = getConnection(context);
 

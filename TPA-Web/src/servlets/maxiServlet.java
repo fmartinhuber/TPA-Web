@@ -37,8 +37,10 @@ public class maxiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		//REMOTO
 		ServiceMensajeria asd = new ServiceMensajeria();
-		productor.sendMessage();
+		//LOCAL
+//		productor.sendMessage();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

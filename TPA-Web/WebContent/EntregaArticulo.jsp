@@ -45,7 +45,7 @@
 
 
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="jquery-3.1.1.js"></script>
 <script>
 	//Tabla Solicitudes de Articulos al iniciar la pagina
 	$(document).ready(function(){

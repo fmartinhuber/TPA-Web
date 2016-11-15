@@ -16,7 +16,6 @@ import com.google.gson.GsonBuilder;
 
 import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
-import serviceMessages.PruebaDespachoQueue;
 import serviceREST.CrearArticuloClient;
 
 

@@ -27,9 +27,8 @@ public class ServiceMensajeria {
 		client.setUserName(user);
 		client.setPassword(pass);
 		try {
-			client.sendMessage("adkfjalsdf");
+			client.sendMessage("Mensaje de prueba");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

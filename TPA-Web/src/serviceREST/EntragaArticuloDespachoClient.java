@@ -33,7 +33,7 @@ public class EntragaArticuloDespachoClient {
 	public static void conexion(SolicitudArticuloDTO solicitudArticuloDTOs){
 		
 		try {
-			URL url = new URL("http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/service/solicitudCompra");
+			URL url = new URL("http://172.16.164.51:8080/DespachoJMS/apis/json/solicitudArticulo");
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();
 //			JsonObject JsonObject = new JsonObject();
 //			JsonObject.addProperty("codigo", articuloDTOs.get(0).getCodigo());

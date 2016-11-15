@@ -6,7 +6,6 @@
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 //
-
 //import javax.ejb.ActivationConfigProperty;
 //import javax.ejb.EJB;
 //import javax.ejb.MessageDriven;
@@ -67,7 +66,7 @@
 //					List<ItemSolicitudArticuloDTO> listaArt = new ArrayList<ItemSolicitudArticuloDTO>();
 //					listaArt.add(itemSolArt);
 //					solicitud.setItemsSolicitudArticulo(listaArt);
-//					deposito.crearSolicitudArticulo(solicitud);
+////					deposito.crearSolicitudArticulo(solicitud);
 //				}else{
 //					System.out.println("MANDE UN ARTICULO COMO LA GENTE !");
 //				}

@@ -24,17 +24,19 @@ public class SolicitudArticuloClient {
 			for (Iterator iterator = solicitudArticuloDTO.getItemsSolicitudArticulo().iterator(); iterator.hasNext();) {
 				ItemSolicitudArticuloDTO itemArticuloSol = (ItemSolicitudArticuloDTO) iterator.next();
 				JsonObject jsonObject = new JsonObject();
-				
-				URL url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");;
-				if(solicitudArticuloDTO.getIdDespacho().equals("D03")){
-					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
-				}else if(solicitudArticuloDTO.getIdDespacho().equals("D05")){
-					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
-				}else if(solicitudArticuloDTO.getIdDespacho().equals("G03")){
-					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
-				}else if(solicitudArticuloDTO.getIdDespacho().equals("G03")){
-					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
-				}
+				String urlP= "http://172.16.164.51:8080/DespachoJMS/api/json/solicitudArticulo";
+//				URL url = new URL("http://172.16.164.51:8080/DespachoJMS/apis/json/solicitudArticulo");
+				URL url = new URL(urlP);
+//				URL url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");;
+//				if(solicitudArticuloDTO.getIdDespacho().equals("D03")){
+//					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
+//				}else if(solicitudArticuloDTO.getIdDespacho().equals("D05")){
+//					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
+//				}else if(solicitudArticuloDTO.getIdDespacho().equals("G03")){
+//					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
+//				}else if(solicitudArticuloDTO.getIdDespacho().equals("G03")){
+//					url = new URL ("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/solicitudArticulo");
+//				}
 				jsonObject.addProperty("idDeposito", "G12");
 				jsonObject.addProperty("codigoArticulo", itemArticuloSol.getArticulo().getCodArticulo());
 				jsonObject.addProperty("cantidad", itemArticuloSol.getCantidad());
@@ -56,7 +58,7 @@ public class SolicitudArticuloClient {
 				String JSON = jsonObject.toString();
 				out.write(JSON.toString());
 				out.close();
-				
+				System.out.println("URL: " + urlP+ "\nJSON: " + JSON);
 				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				
 				while (in.readLine() != null) {
