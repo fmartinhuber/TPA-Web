@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import serviceMessages.MockProductoSolicitudArticulo;
 import serviceMessages.ProductorSolicitudArticuloMessage;
 import serviceMessages.ServiceMensajeria;
 
@@ -38,7 +39,10 @@ public class maxiServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		//REMOTO
-		ServiceMensajeria asd = new ServiceMensajeria();
+		MockProductoSolicitudArticulo asd = new MockProductoSolicitudArticulo();
+		asd.sendMessage();
+		System.out.println("Aqui llegue");
+		//asd.sendMessage();
 		//LOCAL
 //		productor.sendMessage();
 		response.getWriter().append("Served at: ").append(request.getContextPath());

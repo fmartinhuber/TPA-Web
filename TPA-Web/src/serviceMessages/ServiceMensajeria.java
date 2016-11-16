@@ -9,9 +9,9 @@ public class ServiceMensajeria {
 	public ServiceMensajeria() {
 		this.client = new ClientMensajeria();
 		
-		String host = "192.168.0.21";
+		String host = "10.254.79.5";
 		String port = "8080";
-		String queueName ="jms/queue/solicitudArticuloProductor";
+		String queueName ="jms/queue/solicitudArticulo2";
 		//String queueName ="jms/despacho/04/recepcionNuevoArticulo";
 		String user = "test";
 		String pass = "test1234";
