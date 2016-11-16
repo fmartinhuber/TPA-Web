@@ -106,12 +106,12 @@ public class ClientMensajeria {
 		Destination destination = (Destination) context.lookup(destinationString);
 		MessageProducer producer = session.createProducer(destination);
 		connection.start();
-
+		
 		TextMessage msg = session.createTextMessage();
 		msg.setText(message);
 
 		producer.send(msg);
-
+		System.out.println("Se envio el mensaje: " + msg);
 		connection.close();
 
 	}
