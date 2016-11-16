@@ -27,7 +27,7 @@ public class CrearArticuloClient {
 				
 		
 		try {
-			URL url = new URL("http://192.168.1.238:8080/TPA-Web-0.0.1-SNAPSHOT/rest/articulo/crearArticulo");
+			URL url = new URL("http://10.254.79.68:8080/LogisticaREST/rest/services/guardarLog");
 //			Gson prettyGson = new GsonBuilder().serializeNulls().create();
 			JsonObject jsonObject = new JsonObject();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -167,11 +167,5 @@ public class CrearArticuloClient {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 }

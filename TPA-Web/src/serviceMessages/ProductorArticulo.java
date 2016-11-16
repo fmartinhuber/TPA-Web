@@ -1,16 +1,16 @@
 package serviceMessages;
 
-public class ServiceMensajeria {
+public class ProductorArticulo extends ClientMensajeria{
 
 	private ClientMensajeria client;
 	
-	public ServiceMensajeria() {
+	public  ProductorArticulo() {
 		this.client = new ClientMensajeria();
 		
 		String host = "10.254.79.243";
 		String port = "8080";
-		
 		String queueName ="jms/queue/DespachoNuevoArticulo";
+		//String queueName ="jms/despacho/04/recepcionNuevoArticulo";
 		String user = "test";
 		String pass = "test1234";
 		

@@ -97,6 +97,7 @@ public class CrearArticuloServlet extends HttpServlet {
 					
 		// Enviarlo por REST
 		//CrearArticuloJAXRSClient.conexion(articuloDto);
+		CrearArticuloClient.conexion(newArticulo);
 	}
 
 }

@@ -35,25 +35,6 @@ public class EntragaArticuloDespachoClient {
 		try {
 			URL url = new URL("http://172.16.164.51:8080/DespachoJMS/apis/json/solicitudArticulo");
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();
-//			JsonObject JsonObject = new JsonObject();
-//			JsonObject.addProperty("codigo", articuloDTOs.get(0).getCodigo());
-//			JsonObject.addProperty("estado", articuloDTOs.get(0).getEstado());
-//			System.out.println("JsonObject: " + JsonObject.toString());
-//			String JSON = prettyGson.toJson(solicitudArticuloDTOs);
-//			System.out.println("JSON: " + JSON.toString());
-//			URL url;
-//			String ecodedValue1  = URLEncoder.encode(JSON, StandardCharsets.UTF_8.name());
-//			System.out.println("URL: " + URL + ecodedValue1 );
-//			url = new URL(URL + ecodedValue1 );
-			
-//			JsonObject jsonObject = new JsonObject();
-//			jsonObject.addProperty("codigo", articuloDTO);
-//			System.out.println("JsonObject: " + JsonObject.toString());
-//			String JSON = prettyGson.toJson(articuloDTO);
-//			System.out.println("JSON: " + JSON.toString());
-//			URL url;
-//			String ecodedValue1  = URLEncoder.encode(JSON.toString(), StandardCharsets.UTF_8.name());
-//			System.out.println("URL: " + URL + ecodedValue1 );
 			
 
 			URLConnection connection = url.openConnection();
@@ -68,11 +49,7 @@ public class EntragaArticuloDespachoClient {
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			
-			
-//			IOUtils.write("{\"id\" : \"1759\" , \"nombre\" : \"John Doe\" }", url.getOutputStream());
-//			if (urlConnection.getResponseCode() != 200) {
-//				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
-//			}
+			System.out.println();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
