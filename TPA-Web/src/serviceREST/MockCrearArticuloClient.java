@@ -31,17 +31,17 @@ public class MockCrearArticuloClient {
 	@Produces({ "application/json" })
 	public String crearArticulo(InputStream incomingData) {
 		
-		StringBuilder crunchifyBuilder = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
 		
 		try {
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
 			String line = null;
 			while ((line = in.readLine()) != null) {
-				crunchifyBuilder.append(line);
+				stringBuilder.append(line);
 			}
 			
-			String json = crunchifyBuilder.toString();
+			String json = stringBuilder.toString();
 			
 			String decodedValue1 = URLDecoder.decode(json, StandardCharsets.UTF_8.name());
 			Gson gson = new Gson ();
