@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import controler.IEntregaArticuloControladorLocal;
 import dto.*;
-import serviceREST.CrearArticuloClient;
 import serviceREST.SolicitudCompraFabricaClient;
 
 @WebServlet("/SolicitudCompraServlet")

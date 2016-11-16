@@ -13,7 +13,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class ClientMensajeria {
+public class ClienteMensajeria {
 
 	// Set up all the default values
 	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";

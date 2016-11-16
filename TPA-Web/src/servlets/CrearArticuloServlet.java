@@ -16,6 +16,8 @@ import com.google.gson.GsonBuilder;
 
 import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
+import serviceMessages.ProductorArticulo;
+import serviceMessages.ProductorCrearArticulo;
 import serviceREST.CrearArticuloClient;
 
 
@@ -98,6 +100,8 @@ public class CrearArticuloServlet extends HttpServlet {
 		// Enviarlo por REST
 		//CrearArticuloJAXRSClient.conexion(articuloDto);
 		CrearArticuloClient.conexion(newArticulo);
+//		ProductorCrearArticulo asd = new ProductorCrearArticulo();
+//		asd.sendMessage(newArticulo);
 	}
 
 }

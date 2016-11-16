@@ -27,8 +27,8 @@ public class CrearArticuloClient {
 				
 		
 		try {
-			URL url = new URL("http://10.254.79.68:8080/LogisticaREST/rest/services/guardarLog");
-//			Gson prettyGson = new GsonBuilder().serializeNulls().create();
+			String urlString = "http://10.254.79.68:8080/LogisticaREST/rest/services/guardarLog"; 
+			URL url = new URL(urlString);
 			JsonObject jsonObject = new JsonObject();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			String date = sdf.format(new Date());
@@ -38,14 +38,6 @@ public class CrearArticuloClient {
 			jsonObject.addProperty("modulo", "G12");
 			jsonObject.addProperty("descripcion", "Se dio de alta el Articulo " + articuloDTO.getCodArticulo());
 			
-//			System.out.println("JsonObject: " + JsonObject.toString());
-//			String JSON = prettyGson.toJson(articuloDTO);
-//			System.out.println("JSON: " + JSON.toString());
-//			URL url;
-//			String ecodedValue1  = URLEncoder.encode(JSON.toString(), StandardCharsets.UTF_8.name());
-//			System.out.println("URL: " + URL + ecodedValue1 );
-			
-
 			URLConnection connection = url.openConnection();
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Content-Type", "application/json");
@@ -58,9 +50,7 @@ public class CrearArticuloClient {
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			
-//			if (urlConnection.getResponseCode() != 200) {
-//				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
-//			}
+			System.out.println("URL: " + urlString + " JSON: " + JSON);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -99,23 +89,6 @@ public class CrearArticuloClient {
 		
 	}
 	
-	/*
-	 * {
-  "idDeposito": "Gxx",
-  "codArticulo": 1234,
-  "nombre": "Radio Electrico",
-  "descripcion": "Radio Electrico 700w",
-  "marca": "Phillips",
-  "precio": 1500.0,
-  "foto": "http://imgur.com/123456",
-  "origen": "China",
-  "tipo": "Electro",
-  "datosExtra": {
-    "fichaTecnica": "una ficha tecnica en texto libre"
-  }  
-}
-	 * 
-	 */
 	
 	public static void conexionDespacho(ArticuloDTO articuloDTO){			
 		

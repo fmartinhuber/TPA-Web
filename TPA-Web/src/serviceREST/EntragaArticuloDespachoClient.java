@@ -23,17 +23,11 @@ import dto.SolicitudCompraDTO;
 
 public class EntragaArticuloDespachoClient {
 
-	@GET
-    @Path("ping")
-    public String getServerTime() {
-        System.out.println("RESTful Service 'MessageService' is running ==> ping");
-        return "received ping on "+new Date().toString();
-    }
-	
 	public static void conexion(SolicitudArticuloDTO solicitudArticuloDTOs){
 		
 		try {
-			URL url = new URL("http://172.16.164.51:8080/DespachoJMS/apis/json/solicitudArticulo");
+			String urlString = "http://172.16.164.51:8080/DespachoJMS/apis/json/solicitudArticulo";
+			URL url = new URL(urlString);
 			Gson prettyGson = new GsonBuilder().serializeNulls().create();
 			
 
@@ -49,7 +43,7 @@ public class EntragaArticuloDespachoClient {
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			
-			System.out.println();
+			System.out.println("URL: " + urlString + " JSON: " + JSON);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

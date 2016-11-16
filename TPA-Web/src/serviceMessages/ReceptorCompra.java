@@ -24,16 +24,16 @@ import dto.SolicitudCompraDTO;
 				propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 		}, 
 		mappedName = "java:/jms/queue/recepcionCompra")
-public class ReceptorCompraMessage implements MessageListener {
+public class ReceptorCompra implements MessageListener {
 
-	static Logger log = Logger.getLogger(ReceptorCompraMessage.class.getName());
+	static Logger log = Logger.getLogger(ReceptorCompra.class.getName());
 	
 	@EJB
 	IDepositoControladorLocal ejb;
     /**
      * Default constructor. 
      */
-    public ReceptorCompraMessage() {
+    public ReceptorCompra() {
         // TODO Auto-generated constructor stub
     }
 	

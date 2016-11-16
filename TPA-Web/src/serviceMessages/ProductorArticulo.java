@@ -1,11 +1,11 @@
 package serviceMessages;
 
-public class ProductorArticulo extends ClientMensajeria{
+public class ProductorArticulo extends ClienteMensajeria{
 
-	private ClientMensajeria client;
+	private ClienteMensajeria client;
 	
 	public  ProductorArticulo() {
-		this.client = new ClientMensajeria();
+		this.client = new ClienteMensajeria();
 		
 		String host = "10.254.79.243";
 		String port = "8080";

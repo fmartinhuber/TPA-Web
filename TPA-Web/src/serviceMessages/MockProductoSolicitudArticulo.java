@@ -2,7 +2,7 @@ package serviceMessages;
 
 import javax.jms.Message;
 
-public class MockProductoSolicitudArticulo extends ClientMensajeria{
+public class MockProductoSolicitudArticulo extends ClienteMensajeria{
 
 	
 	public void sendMessage() {

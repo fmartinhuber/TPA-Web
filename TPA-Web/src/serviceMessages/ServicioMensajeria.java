@@ -1,11 +1,11 @@
 package serviceMessages;
 
-public class ServiceMensajeria {
+public class ServicioMensajeria {
 
-	private ClientMensajeria client;
+	private ClienteMensajeria client;
 	
-	public ServiceMensajeria() {
-		this.client = new ClientMensajeria();
+	public ServicioMensajeria() {
+		this.client = new ClienteMensajeria();
 		
 		String host = "10.254.79.243";
 		String port = "8080";
