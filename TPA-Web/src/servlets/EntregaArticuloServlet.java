@@ -178,7 +178,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			String solicitudABuscar = request.getParameter("solicitudBuscada");
 			
 			//Decrementar Stock
-//			depositoEntregaArticulo.decrementarStock(solicitudABuscar);
+			depositoEntregaArticulo.decrementarStock(solicitudABuscar);
 			
 			//Mandar JSON
 			SolicitudArticuloDTO miSolArtDto = new SolicitudArticuloDTO();
@@ -187,7 +187,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 			SolicitudArticuloClient.conexion(miSolArtDto);
 			
 			//Actualizar estado Solicitud
-//			depositoEntregaArticulo.actualizarEstadoSolicitud(solicitudABuscar);
+			depositoEntregaArticulo.actualizarEstadoSolicitud(solicitudABuscar);
 			
 			//
 			
