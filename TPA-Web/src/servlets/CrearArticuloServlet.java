@@ -90,6 +90,7 @@ public class CrearArticuloServlet extends HttpServlet {
 		try{
 			// Enviarlo por REST
 			CrearArticuloClient.conexionLogistica(newArticulo);
+			//Envio colas mensajeria
 			ProductorCrearArticulo asd = new ProductorCrearArticulo();
 			asd.sendMessageLogistica(newArticulo);
 			asd.sendMessageDespacho(newArticulo);

@@ -1,13 +1,16 @@
 package serviceREST;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Iterator;
+
+import org.apache.commons.io.IOUtils;
 
 import com.google.gson.JsonObject;
 
@@ -20,7 +23,7 @@ public class SolicitudArticuloClient {
 
 		try {
 			
-			String DespachoXX = "http://172.16.164.51:8080/DespachoJMS/apis/json/solicitudArticulo";
+			String DespachoXX = "http://192.168.0.104:8080/DespachoJMS/api/json/solicitudArticulo";
 			for (Iterator iterator = solicitudArticuloDTO.getItemsSolicitudArticulo().iterator(); iterator.hasNext();) {
 				//Daro 17.11: Definir las URL de Despacho
 				String DespachoYY = "acaURL";
@@ -31,7 +34,7 @@ public class SolicitudArticuloClient {
 				
 				//Dependiendo el despacho, llamo a esa URL
 				URL url = null;
-				if (obtenerDespacho.equals("D11")){
+				if (obtenerDespacho.equals("\"G11\"")){
 					url = new URL (DespachoXX);
 				}
 				if (obtenerDespacho.equals("DYY")){
@@ -47,23 +50,28 @@ public class SolicitudArticuloClient {
 					JsonObject jsonObject = new JsonObject();
 					
 					jsonObject.addProperty("idDeposito", "G12");
-					jsonObject.addProperty("codigoArticulo", itemArticuloSol.getArticulo().getCodArticulo());
+					jsonObject.addProperty("codArticulo", Integer.valueOf(itemArticuloSol.getArticulo().getCodArticulo()));
 					jsonObject.addProperty("cantidad", itemArticuloSol.getCantidad());
+					String JSON = jsonObject.toString();
+					System.out.println("JSON: " + JSON);
 					
-					URLConnection connection = url.openConnection();
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setDoOutput(true);
 					connection.setRequestProperty("Content-Type", "application/json");
 					connection.setConnectTimeout(5000);
 					connection.setReadTimeout(5000);
-					OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-					String JSON = jsonObject.toString();
-					out.write(JSON.toString());
-					out.close();
-					BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//					connection.setRequestMethod("POST");
 					
+					OutputStream out = connection.getOutputStream();
+					out.write(JSON.toString().getBytes());
+					out.flush();
+					BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					String response = IOUtils.toString(connection.getInputStream());
 					while (in.readLine() != null) {
 						System.out.println("\nSolicitudArticuloClient Invoked Successfully..");
 					}
+					out.close();
+					System.out.println(response);
 				}
 			}
 				

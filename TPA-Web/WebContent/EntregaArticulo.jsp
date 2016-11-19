@@ -52,11 +52,12 @@
   	<script src="assets/js/jquery.isotope.min.js"></script>
   	<script src="assets/js/custom.js"></script>
 <script src="jquery-3.1.1.js"></script>
+<script src="min-google.js"></script>
 <script>
 	//Tabla Solicitudes de Articulos al iniciar la pagina
 	$(document).ready(function(){
 		var accion = "obtSolPen";
-		$.get("EntregaArticuloServlet", {opcion: accion}, function(responseText) {
+		$.get("SolicitudArticuloServlet", {opcion: accion}, function(responseText) {
 			var obtenido = responseText;
 			var obtParseRow = obtenido.split("-??");
 			$('#SolicitudArticulo tr').not(':first').remove();
@@ -78,7 +79,7 @@
 		$("#obtArticulos").click(function() {
 			var accion = "obtArticulos";
 			var valorSolBuscada = $('#solicitudSeleccionada').val();
-			$.get("EntregaArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
+			$.get("SolicitudArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
 				var obtenido = responseText;
 				var obtParseRow = obtenido.split("-??");
 
@@ -109,7 +110,7 @@
 			var valorArtBuscado = $('#codModArticulo').val();
 			var valorSolBuscada = $('#solicitudMuestra').val();
 
-			$.get("EntregaArticuloServlet", {opcion: accion, articuloBuscado: valorArtBuscado, solicitudBuscada: valorSolBuscada}, function(responseText) {
+			$.get("SolicitudArticuloServlet", {opcion: accion, articuloBuscado: valorArtBuscado, solicitudBuscada: valorSolBuscada}, function(responseText) {
 				var obtenido = responseText;
 				var obtParseRow = obtenido.split(";?");
 
@@ -139,7 +140,7 @@
 			
 			//Si es Natural o cero continuo, sino alerta
 			if (esNatural(nuevaCantidad)){
-				$.get("EntregaArticuloServlet", {opcion: accion, nuevaCant: nuevaCantidad, articulo: articuloAModificar, solicitudBuscada: valorSolBuscada}, function(responseText) {
+				$.get("SolicitudArticuloServlet", {opcion: accion, nuevaCant: nuevaCantidad, articulo: articuloAModificar, solicitudBuscada: valorSolBuscada}, function(responseText) {
 					//Blanqueo campos y alerta que se actualizo de forma correcta
 					alert("Cantidad de Articulo modificada de forma correcta");
 					$('#codModArticulo').val('');
@@ -159,7 +160,7 @@
 		$("#realizarEntrega").click(function(){
 			var accion = "realizarEntrega";
 			var valorSolBuscada = $('#solicitudMuestra').val();
-			$.get("EntregaArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
+			$.get("SolicitudArticuloServlet", {opcion: accion, solicitudBuscada: valorSolBuscada}, function(responseText) {
 				alert("Se realiza la entrega a Despacho de la Solicitud: " + valorSolBuscada);
 			});
 		});

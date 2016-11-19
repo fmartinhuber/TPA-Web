@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
@@ -29,31 +30,25 @@ public class SolicitudCompraFabricaClient {
 		Gson prettyGson = new GsonBuilder().serializeNulls().create();
 		URL url;
 		try {
-			url = new URL( "http://192.168.0.102:8080/DespachoJMS/api/json/solicitudArticulo");
+			url = new URL( "http://192.168.0.106:8080/TPA-Web-0.0.1-SNAPSHOT/solicitud/solicitudCompra");
 		
-			URLConnection connection = url.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Content-Type", "application/json");
 			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
-			JsonObject jsonObject = new JsonObject();
-			for (Iterator iterator = solicitudCompraDTOs.getItemsSolicitudesCompra().iterator(); iterator.hasNext();) {
-				OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-				ItemSolicitudCompraDTO itemSolicitud = (ItemSolicitudCompraDTO) iterator;
-				jsonObject.addProperty("idDeposito", "G12");
-				jsonObject.addProperty("codArticulo", itemSolicitud.getArticulo().getCodArticulo());
-				jsonObject.addProperty("cantidad", itemSolicitud.getArticulo().getCantidadDisponible());
-				String JSON = prettyGson.toJson(solicitudCompraDTOs);
-				out.write(JSON.toString());
-				out.close();
-				
-				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				String response = IOUtils.toString(connection.getInputStream());
-				while (in.readLine() != null) {
-					System.out.println(response);
-				}
-				
-				in.close();
+			connection.setRequestMethod("POST");
+
+			prettyGson.toJson(solicitudCompraDTOs);
+			System.out.println("json: " + prettyGson.toString());
+			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+			out.write(prettyGson.toString());
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String response = IOUtils.toString(connection.getInputStream());
+			while (in.readLine() != null) {
+				System.out.println(response);
+			
+			in.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
