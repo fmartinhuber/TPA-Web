@@ -89,7 +89,7 @@ public class CrearArticuloServlet extends HttpServlet {
 		String nextJSP = "/ok.jsp";
 		try{
 			// Enviarlo por REST
-			CrearArticuloClient.conexionLogistica(newArticulo);
+//			CrearArticuloClient.conexionLogistica(newArticulo);
 			//Envio colas mensajeria
 			ProductorCrearArticulo asd = new ProductorCrearArticulo();
 			asd.sendMessageLogistica(newArticulo);

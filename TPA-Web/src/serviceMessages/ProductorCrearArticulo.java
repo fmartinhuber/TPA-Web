@@ -37,7 +37,7 @@ public class ProductorCrearArticulo extends ClienteMensajeria{
 		jsonObject.addProperty("fecha", date);
 		jsonObject.addProperty("tipo", "Deposito");
 		jsonObject.addProperty("modulo", "G12");
-		jsonObject.addProperty("descripcion", "Se dio de alta el Articulo " + articuloDto.getCodArticulo());
+		jsonObject.addProperty("descripcion", "Se dio de alta el Articulo " + articuloDto.getCodArticulo() + " Desc: " + articuloDto.getDescripcion());
 		System.out.println(jsonObject.toString());
 		try {
 			this.sendMessage(jsonObject.toString());
@@ -106,8 +106,8 @@ public class ProductorCrearArticulo extends ClienteMensajeria{
 		jsonObject.addProperty("origen", articuloDTO.getOrigen());
 		jsonObject.addProperty("tipo", articuloDTO.getTipo());
 //		jsonObject.addProperty("datosExtra", articuloDTO.get);
-		String asd = "{\"idDeposito\":\"G12\",\"codArticulo\":"+ articuloDTO.getCodArticulo() +",\"nombre\":\"Radio Electrico\",\"descripcion\":\"Radio Electrico 700w\",\"marca\":\"Phillips\",\"precio\":1500.0,\"foto\":\"1234\",\"origen\":\"China\",\"tipo\":\"Electro\",\"datosExtra\":{\"fichaTecnica\":\"una ficha tecnica en texto libre\"}}";
-		System.out.println(jsonObject.toString());
+		String asd = "{\"idDeposito\":\"G12\",\"codArticulo\":"+ articuloDTO.getCodArticulo() +",\"nombre\":\"" + articuloDTO.getNombre() + "\",\"descripcion\": \"" + articuloDTO.getDescripcion() +"\",\"marca\": \"" + articuloDTO.getMarca() + "\",\"precio\": " + articuloDTO.getPrecio() + ",\"foto\": \"" + articuloDTO.getFoto() +"\",\"origen\": \"" + articuloDTO.getOrigen() +"\",\"tipo\": \"" + articuloDTO.getTipo() + "\",\"datosExtra\":{\"fichaTecnica\":\"una ficha tecnica en texto libre\"}}";
+		System.out.println(asd);
 		try {
 			this.sendMessage(asd);
 		} catch (Exception e) {

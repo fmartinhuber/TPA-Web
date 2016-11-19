@@ -62,19 +62,19 @@
 	 ***************************************************************************************************************** -->
 	<div id="headerwrap">
 	    <div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
+			<div class="row ">
+				<div class="col-lg-6 col-md-3 himg img-rounded">
+					<img src="assets/img/deposito.jpg" class="img-responsive">
+				</div>
+				<div class="col-lg-6 col-md-3">
 					<h3>Integracion de Aplicaciones - Lunes Noche 2016</h3>
 					<h1>Grupo 12 - Deposito</h1>
 					<h5>Integrantes: </h5>
-					<h5>- Cao, Maximiliano</h5>
+					<h5><strike>- Cao, Maximiliano</strike></h5>
 					<h5>- Fryda, Ramiro</h5>	
 					<h5>- Gramajo, Carlos</h5>	
 					<h5>- Huber, Martin</h5>	
 					<h5>- Nieto, Dario</h5>	
-				</div>
-				<div class="col-lg-8 col-lg-offset-2 himg img-rounded">
-					<img src="assets/img/deposito.jpg" class="img-responsive">
 				</div>
 			</div><!-- /row -->
 	    </div> <!-- /container -->

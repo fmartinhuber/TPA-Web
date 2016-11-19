@@ -27,10 +27,10 @@ public class SolicitudCompraFabricaClient {
 
 	public static void conexion(SolicitudCompraDTO solicitudCompraDTOs) {
 		
-		Gson prettyGson = new GsonBuilder().serializeNulls().create();
+		Gson prettyGson = new GsonBuilder().create();
 		URL url;
 		try {
-			url = new URL( "http://192.168.0.106:8080/TPA-Web-0.0.1-SNAPSHOT/solicitud/solicitudCompra");
+			url = new URL( "http://localhost:8080/TPA-Web-0.0.1-SNAPSHOT/rest/solicitud/solicitudCompra");
 		
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
@@ -39,10 +39,11 @@ public class SolicitudCompraFabricaClient {
 			connection.setReadTimeout(5000);
 			connection.setRequestMethod("POST");
 
-			prettyGson.toJson(solicitudCompraDTOs);
-			System.out.println("json: " + prettyGson.toString());
+			
+			System.out.println("json: " + prettyGson.toJson(solicitudCompraDTOs));
 			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-			out.write(prettyGson.toString());
+			out.write(prettyGson.toJson(solicitudCompraDTOs));
+			out.flush();
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String response = IOUtils.toString(connection.getInputStream());
 			while (in.readLine() != null) {
