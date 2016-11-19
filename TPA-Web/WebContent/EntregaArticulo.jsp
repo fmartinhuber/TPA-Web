@@ -43,8 +43,14 @@
     
 </head>
 
-
-
+<script src="min-google.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+  	<script src="assets/js/jquery.isotope.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
 <script src="jquery-3.1.1.js"></script>
 <script>
 	//Tabla Solicitudes de Articulos al iniciar la pagina
@@ -179,13 +185,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            
           </button>
           <a class="navbar-brand" href="index.jsp">Grupo 12 - Deposito</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-          	<li><a href="EntregaArticulo.jsp">ENTREGA DE ARTICULO </a></li>
             <li class="active"><a href="index.jsp">MENU PRINCIPAL</a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">ARTICULOS <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="TipoArticulo.jsp">CREAR ARTICULO</a></li>
+                <li><a href="ModificarArticulo.jsp">MODIFICAR ARTICULO</a></li>
+              </ul>
+            </li>
+            
+            <li><a href="SolicitudCompra.jsp">SOLICITUD DE COMPRA </a></li>
+            <li><a href="EntregaArticulo.jsp">ENTREGA DE ARTICULO </a></li>
+ 
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -196,22 +214,21 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
 			    	
-			    	Solicitud de Articulos
-			    	<table id=SolicitudArticulo>
+			    	<h3>Solicitud de Articulos</h3>
+			    	<table id="SolicitudArticulo" class="table table-striped">
 			    		<tr>
 			    			<td>Codigo</td>
 			    			<td>Fecha</td>
-			    			<!--<td>Seleccione</td>-->
 			    		</tr>
 			    	</table>
 			    	<br><br>
 			    	
-			    	Codigo Solicitud de Articulos: <input type="text" name="solicitudSeleccionada" id="solicitudSeleccionada">
-			    	<button type="button" id="obtArticulos" name="obtArticulos">Obtener Articulos</button>
-			    	
+			    	<h3>Codigo Solicitud de Articulos</h3> <input class="form-control" type="text" name="solicitudSeleccionada" id="solicitudSeleccionada">
+			    	<button class="btn btn-success btn-lg" type="button"  id="obtArticulos" name="obtArticulos">Obtener Articulos</button>
 			    	<br><br>
-			    	Articulos de la Solicitud <input type="text" name="solicitudMuestra" id="solicitudMuestra" disabled readonly>
-					<table id=DetalleSolicitado>
+			    	<h3>Articulos de la Solicitud<h3></h3> <input class="form-control" type="text" name="solicitudMuestra" id="solicitudMuestra" disabled readonly>
+					<br><br>
+					<table id="DetalleSolicitado" class="table table-striped">
 				 		<tr>
 				 			<td>Codigo</td>
 				 			<td>Nombre</td>
@@ -220,25 +237,23 @@
 				 			<td>Cumplimiento</td>
 				 		</tr>
 				 	</table>
-				 	
-				 	<br><br>
 				 	<hr>
 				 	<br><br>
 				 	
-				 	<h4>Modificacion de Cantidades</h4>
-				 	
-				 	Codigo Articulo: <input type="text" name="codModArticulo" id="codModArticulo">
-				 	<button type="button" id="obtModifArticulos" name="obtModifArticulos">Modificar Articulo</button><br>
-				 	Cantidad Solicitada: <input type="text" name="cantSolicitadaArticulo" id="cantSolicitadaArticulo" disabled readonly><br>
-				 	Cantidad en Stock: <input type="text" name="cantStockArticulo" id="cantStockArticulo" disabled readonly><br>
-				 	Nueva cantidad a solicitar: <input type="text" name="nuevaCantidadArticulo" id="nuevaCantidadArticulo"><br>
-				 	<button type="button" id="modificarArticulo" name="modificarArticulo">Aceptar</button><br>
-				 	
-				 	<br><br>
+				 	<h3>Modificacion de Cantidades</h3>
+				 	<table class="table table-striped">
+				 	<tr><td>Codigo Articulo:</td><td><input class="form-control" type="text" name="codModArticulo" id="codModArticulo"> <button type="button" class="btn btn-primary" id="obtModifArticulos" name="obtModifArticulos">Modificar Articulo</button></td></tr>
+				 	<tr><td>Cantidad Solicitada: </td><td><input class="form-control" type="text" name="cantSolicitadaArticulo" id="cantSolicitadaArticulo" disabled readonly></td></tr>
+				 	<tr><td>Cantidad en Stock:  </td><td><input class="form-control" type="text" name="cantStockArticulo" id="cantStockArticulo" disabled readonly></td></tr>
+				 	<tr><td>Nueva cantidad a solicitar: </td><td><input class="form-control" type="text" name="nuevaCantidadArticulo" id="nuevaCantidadArticulo"></td></tr>
+				 	<tr></tr>
+				 	<tr><td></td>
+				 		<td><button type="button" class="btn btn-danger" id="modificarArticulo" name="modificarArticulo">Aceptar</button><br></td>
+				 	</tr>
 				 	<hr>
-				 	<br><br>
+				 	</table>
 				 	
-				 	<button type="button" id="realizarEntrega" name="realizarEntrega">Realizar Entrega de Articulo</button><br>
+				 	<button class="btn btn-success btn-lg" type="button" id="realizarEntrega" name="realizarEntrega">Realizar Entrega de Articulo</button><br>
 				 	
 				 	<br><br>
 				 	

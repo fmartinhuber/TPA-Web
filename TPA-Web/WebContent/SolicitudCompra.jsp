@@ -40,7 +40,14 @@
 	</style>
     
   </head>
-  
+  <script src="min-google.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+  	<script src="assets/js/jquery.isotope.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
 <script src="jquery-3.1.1.js"></script>
 <script>
 	//Tabla Solicitudes de Articulos al iniciar la pagina
@@ -143,13 +150,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            
           </button>
           <a class="navbar-brand" href="index.jsp">Grupo 12 - Deposito</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-          	<li><a href="SolicitudCompra.jsp">SOLICITUD DE COMPRA </a></li>
             <li class="active"><a href="index.jsp">MENU PRINCIPAL</a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">ARTICULOS <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="TipoArticulo.jsp">CREAR ARTICULO</a></li>
+                <li><a href="ModificarArticulo.jsp">MODIFICAR ARTICULO</a></li>
+              </ul>
+            </li>
+            
+            <li><a href="SolicitudCompra.jsp">SOLICITUD DE COMPRA </a></li>
+            <li><a href="EntregaArticulo.jsp">ENTREGA DE ARTICULO </a></li>
+ 
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -161,8 +180,8 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
 			    	
-			    	Solicitud de Articulos
-			    	<table id=SolicitudArticulo>
+			    	<h2>Solicitud de Articulos</h2>
+			    	<table id="SolicitudArticulo" class="table table-striped">
 			    		<tr>
 			    			<td>Codigo</td>
 			    			<td>Fecha</td>
@@ -170,12 +189,12 @@
 			    	</table>
 			    	<br><br>
 			    	
-			    	Codigo Solicitud de Articulos: <input type="text" name="solicitudSeleccionada" id="solicitudSeleccionada">
-			    	<button type="button" id="obtArticulos" name="obtArticulos">Obtener Articulos</button>
+			    	<h3>Codigo Solicitud de Articulos</h3> <input class="form-control" type="text" name="solicitudSeleccionada" id="solicitudSeleccionada">
+			    	<button type="button" class="btn btn-success btn-lg" id="obtArticulos" name="obtArticulos">Obtener Articulos</button>
 			    	
 			    	<br><br>
-			    	Articulos de la Solicitud <input type="text" name="solicitudMuestra" id="solicitudMuestra" disabled readonly>
-					<table id=DetalleSolicitado>
+			    	<h3>Articulos de la Solicitud</h3> <input class="form-control" type="text" name="solicitudMuestra" id="solicitudMuestra" disabled readonly>
+					<table id=DetalleSolicitado class="table table-striped">
 				 		<tr>
 				 			<td>Codigo</td>
 				 			<td>Nombre</td>
@@ -186,17 +205,16 @@
 				 	
 				 	<br><br>
 				 	<hr>         
-				 	<br><br>
 				 	
-				 	<h4>Seleccionar Articulos a Comprar</h4>
+				 	<h2>Seleccionar Articulos a Comprar</h2>
 				 	
-				 	Codigo Articulo: <input type="text" name="codCompraArticulo" id="codCompraArticulo">
-				 	Cantidad a comprar: <input type="text" name="cantAComprar" id="cantAComprar"><br>
-				 	<button type="button" id="ingresarArt" name="ingresarArt">Ingresar Articulo</button><br> 
+				 	<h3>Codigo Articulo</h3> <input class="form-control" type="text" name="codCompraArticulo" id="codCompraArticulo">
+				 	<h3>Cantidad a comprar</h3> <input class="form-control" type="text" name="cantAComprar" id="cantAComprar"><br>
+				 	<button type="button" class="btn btn-success btn-lg" id="ingresarArt" name="ingresarArt">Ingresar Articulo</button><br> 
 				 	
 				 	<br>
-					Articulos Comprar
-			    	<table id=ComprarArticulo>
+					<h3>Articulos Comprar</h3>
+			    	<table id="ComprarArticulo" class="table table-striped">
 			    		<tr>
 			    			<td>Codigo Solicitud</td>
 			    			<td>Codigo Articulo</td>
@@ -205,7 +223,7 @@
 			    	</table>
 			    	<br><br><br>
 				 	
-				 	<button type="button" id="realizarSolicitudCompra" name="realizarSolicitudCompra">Realizar Solicitud de Compra</button><br> 
+				 	<button class="btn btn-success btn-lg" type="button" id="realizarSolicitudCompra" name="realizarSolicitudCompra">Realizar Solicitud de Compra</button><br> 
 				 	<br><br>
 				 	
 			    	

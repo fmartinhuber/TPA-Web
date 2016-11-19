@@ -73,7 +73,7 @@
 					<h5>- Huber, Martin</h5>	
 					<h5>- Nieto, Dario</h5>	
 				</div>
-				<div class="col-lg-8 col-lg-offset-2 himg">
+				<div class="col-lg-8 col-lg-offset-2 himg img-rounded">
 					<img src="assets/img/deposito.jpg" class="img-responsive">
 				</div>
 			</div><!-- /row -->
@@ -84,7 +84,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="min-google.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/retina-1.1.0.js"></script>
 	<script src="assets/js/jquery.hoverdir.js"></script>

@@ -21,7 +21,14 @@
 
 <script src="assets/js/modernizr.js"></script>
 </head>
-
+<script src="min-google.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+  	<script src="assets/js/jquery.isotope.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
 <script type="text/javascript">
 
 function agregar(){
@@ -67,25 +74,36 @@ function elaboradoCreada (numero){
 
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.jsp">Grupo 12 - Deposito</a>
-			</div>
-			<div class="navbar-collapse collapse navbar-right">
-				<ul class="nav navbar-nav">
-<!-- 					<li><a href="CrearArticulo.jsp">CREAR ARTICULO </a></li>	 -->
-					<li class="active"><a href="index.jsp">MENU PRINCIPAL</a></li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-	</div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            
+          </button>
+          <a class="navbar-brand" href="index.jsp">Grupo 12 - Deposito</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.jsp">MENU PRINCIPAL</a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">ARTICULOS <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="TipoArticulo.jsp">CREAR ARTICULO</a></li>
+                <li><a href="ModificarArticulo.jsp">MODIFICAR ARTICULO</a></li>
+              </ul>
+            </li>
+            
+            <li><a href="SolicitudCompra.jsp">SOLICITUD DE COMPRA </a></li>
+            <li><a href="EntregaArticulo.jsp">ENTREGA DE ARTICULO </a></li>
+ 
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 
 	<div id="headerwrap">
 		<div class="container">
@@ -97,7 +115,7 @@ function elaboradoCreada (numero){
 					<form action="CrearArticuloServlet" method="POST">
 		<input type="hidden" name="listaElaborado" id="listaElaborado" value="">
 		<input type="hidden" name="metodo" id="metodo" value="">		
-		<table>		
+		<table class="table table-striped">		
 			<tr>
 				<td colspan="2" align="center">Crear Artículo Niño</td>
 			</tr>
@@ -111,46 +129,46 @@ function elaboradoCreada (numero){
 		 -->
 		 	<tr>
 				<td>Id Depósito: </td>
-				<td><input name="deposito" id="deposito" value="G12" readonly="readonly"></td>
+				<td><input class="form-control" name="deposito" id="deposito" value="G12" readonly="readonly"></td>
 			</tr>
 		 
 		 	<tr>
 				<td>Tipo: </td>
-				<td><input name="tipo" id="tipo" value="Infantil" readonly="readonly"></td>
+				<td><input class="form-control" name="tipo" id="tipo" value="Infantil" readonly="readonly"></td>
 			</tr>	 	
 		 		 		
 			<tr>
 				<td>Código: </td>
-				<td><input type="TEXT" name="codigo" id="codigo"></td>
+				<td><input class="form-control" type="TEXT" name="codigo" id="codigo"></td>
 			</tr>
 			<tr>
 				<td>Nombre: </td>
-				<td><input type="TEXT" name="nombre" id="nombre"></td>
+				<td><input class="form-control" type="TEXT" name="nombre" id="nombre"></td>
 			</tr>
 			<tr>
 				<td>Descripción: </td>
-				<td><input type="TEXT" name="descripcion" id="descripcion"></td>
+				<td><input class="form-control" type="TEXT" name="descripcion" id="descripcion"></td>
 			</tr>
 			
 			<tr>
 				<td>Fecha: </td>
-				<td><input type="TEXT" value="<%=currentDate%>" name="fecha" id="fecha" readonly="readonly"></td>
+				<td><input class="form-control" type="TEXT" value="<%=currentDate%>" name="fecha" id="fecha" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>Foto: </td>
-				<td><input type="TEXT" name="foto" id="foto"></td>
+				<td><input class="form-control" type="TEXT" name="foto" id="foto"></td>
 			</tr>
 			<tr>
 				<td>Marca: </td>
-				<td><input type="TEXT" name="marca" id="marca"></td>
+				<td><input class="form-control" type="TEXT" name="marca" id="marca"></td>
 			</tr>
 			<tr>
 				<td>Origen: </td>
-				<td><input type="TEXT" name="origen" id="origen"></td>
+				<td><input class="form-control" type="TEXT" name="origen" id="origen"></td>
 			</tr>
 			<tr>
 				<td>Precio: </td>
-				<td><input type="TEXT" name="precio" id="precio"></td>
+				<td><input class="form-control" type="TEXT" name="precio" id="precio"></td>
 			</tr>
 			<!-- 
 			<tr>
@@ -160,7 +178,7 @@ function elaboradoCreada (numero){
 			 -->
 			<tr>
 				<td>Edad recomendada: </td>
-				<td><input type="TEXT" name="edad" id="edad"></td>
+				<td><input class="form-control" type="TEXT" name="edad" id="edad"></td>
 			</tr>
 		
 			
@@ -170,8 +188,8 @@ function elaboradoCreada (numero){
 			</tr>	
 			 -->	
 			<tr>
-				<td align="center"><input type="submit" value="Aceptar" onClick="enviar();"></td>
-				<td align="center"><input type="reset" value="Cancelar"></td>
+				<td align="center"><input type="submit" class="btn btn-primary" value="Aceptar" onClick="enviar();"></td>
+				<td align="center"><input type="reset" class="btn btn-danger" value="Cancelar"></td>
 			</tr>
 		</table>
 

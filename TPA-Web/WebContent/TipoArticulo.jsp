@@ -18,32 +18,49 @@
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-
+<script src="min-google.js"></script>
 <script src="assets/js/modernizr.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+  	<script src="assets/js/jquery.isotope.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
 </head>
 <body>
 
-	<!-- Fixed navbar -->
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.jsp">Grupo 12 - Deposito</a>
-			</div>
-			<div class="navbar-collapse collapse navbar-right">
-				<ul class="nav navbar-nav">
-					<!-- <li><a href="CrearArticulo.jsp">CREAR ARTICULO </a></li>  -->
-					<li class="active"><a href="index.jsp">MENU PRINCIPAL</a></li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-	</div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            
+          </button>
+          <a class="navbar-brand" href="index.jsp">Grupo 12 - Deposito</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.jsp">MENU PRINCIPAL</a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">ARTICULOS <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="TipoArticulo.jsp">CREAR ARTICULO</a></li>
+                <li><a href="ModificarArticulo.jsp">MODIFICAR ARTICULO</a></li>
+              </ul>
+            </li>
+            
+            <li><a href="SolicitudCompra.jsp">SOLICITUD DE COMPRA </a></li>
+            <li><a href="EntregaArticulo.jsp">ENTREGA DE ARTICULO </a></li>
+ 
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 
 	<div id="headerwrap">
 		<div class="container">
@@ -54,11 +71,11 @@
 
 					<h4>Eliga el Tipo de Artículo que desea dar de Alta</h4>
 
-					<table id=TipoArticulo>					
-						<li><a href="CrearArticuloElectrodomestico.jsp">Electrodoméstico</a></li>
-						<li><a href="CrearArticuloModa.jsp">Moda</a></li>
-						<li><a href="CrearArticuloMueble.jsp">Muebles</a></li>
-						<li><a href="CrearArticuloNinos.jsp">Infantil</a></li>																		
+					<table id="TipoArticulo" class="table table-hover">
+						<tr><td><a href="CrearArticuloElectrodomestico.jsp">Electrodoméstico</a></td></tr>					
+						<tr><td><a href="CrearArticuloModa.jsp">Moda</a></td></tr>
+						<tr><td><a href="CrearArticuloMueble.jsp">Muebles</a></td></tr>
+						<tr><td><a href="CrearArticuloNinos.jsp">Infantil</a></td></tr>																		
 					</table>
 
 

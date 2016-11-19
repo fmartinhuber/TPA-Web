@@ -2,21 +2,20 @@ package servlets;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.ejb.EJB;
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import controler.IDepositoControladorLocal;
 import dto.ArticuloDTO;
-import serviceMessages.ProductorArticulo;
 import serviceMessages.ProductorCrearArticulo;
 import serviceREST.CrearArticuloClient;
 
@@ -48,7 +47,8 @@ public class CrearArticuloServlet extends HttpServlet {
 			if (request.getParameter("metodo").equalsIgnoreCase("crearArticulo")) {
 				crearArticulo(request, response);
 			} else if (request.getParameter("metodo").equalsIgnoreCase("nuevoMetodo")) {					
-				}
+				
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,25 +85,26 @@ public class CrearArticuloServlet extends HttpServlet {
 		newArticulo.setColor(request.getParameter("color"));
 		newArticulo.setTalle(request.getParameter("talle"));
 		
-		
 		deposito.crearArticulo(newArticulo);
+		String nextJSP = "/ok.jsp";
+		try{
+			// Enviarlo por REST
+			CrearArticuloClient.conexionLogistica(newArticulo);
+			ProductorCrearArticulo asd = new ProductorCrearArticulo();
+			asd.sendMessageLogistica(newArticulo);
+			asd.sendMessageDespacho(newArticulo);
+			asd.sendMessagePortal(newArticulo);
+		}catch (Exception e){
+			nextJSP = "/noOk.jsp";
+		}
 		
-//		Gson prettyGson = new GsonBuilder().serializeNulls().create();
-//		String JSON = prettyGson.toJson(newArticulo); 
-//
-//		CrearArticuloClient.conexion(newArticulo);
-//		PruebaDespachoQueue.prueba("prueeeeeeeeeeeeeeba");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
+		try {
+			dispatcher.forward(request,response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
 		
-		response.getWriter().print("<h1> Se creó el artículo de tipo " +newArticulo.getTipo()+"<h1>");		
-		response.getWriter().print("<p> <a href=\"/TPA-Web-0.0.1-SNAPSHOT/\">Regresar Menu</a></p>");		
-					
-		// Enviarlo por REST
-		//CrearArticuloJAXRSClient.conexion(articuloDto);
-		CrearArticuloClient.conexionLogistica(newArticulo);
-		ProductorCrearArticulo asd = new ProductorCrearArticulo();
-		asd.sendMessageLogistica(newArticulo);
-		asd.sendMessageDespacho(newArticulo);
-		asd.sendMessagePortal(newArticulo);
 	}
 
 }
