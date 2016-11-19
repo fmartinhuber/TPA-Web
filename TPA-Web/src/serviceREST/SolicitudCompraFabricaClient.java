@@ -24,7 +24,7 @@ import dto.SolicitudCompraDTO;
 public class SolicitudCompraFabricaClient {
 
 
-	public static void conexion(SolicitudCompraDTO solicitudArticuloDTOs) {
+	public static void conexion(SolicitudCompraDTO solicitudCompraDTOs) {
 		
 		Gson prettyGson = new GsonBuilder().serializeNulls().create();
 		URL url;
@@ -37,13 +37,13 @@ public class SolicitudCompraFabricaClient {
 			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
 			JsonObject jsonObject = new JsonObject();
-			for (Iterator iterator = solicitudArticuloDTOs.getItemsSolicitudesCompra().iterator(); iterator.hasNext();) {
+			for (Iterator iterator = solicitudCompraDTOs.getItemsSolicitudesCompra().iterator(); iterator.hasNext();) {
 				OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
 				ItemSolicitudCompraDTO itemSolicitud = (ItemSolicitudCompraDTO) iterator;
 				jsonObject.addProperty("idDeposito", "G12");
 				jsonObject.addProperty("codArticulo", itemSolicitud.getArticulo().getCodArticulo());
 				jsonObject.addProperty("cantidad", itemSolicitud.getArticulo().getCantidadDisponible());
-				String JSON = prettyGson.toJson(solicitudArticuloDTOs);
+				String JSON = prettyGson.toJson(solicitudCompraDTOs);
 				out.write(JSON.toString());
 				out.close();
 				

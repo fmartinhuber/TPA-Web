@@ -23,18 +23,18 @@ import serviceREST.SolicitudCompraFabricaClient;
 /**
  * Servlet implementation class PruebaServlet
  */
-@WebServlet("/PruebaServlet")
-public class PruebaServlet extends HttpServlet {
+@WebServlet("/MockSolicitudCompraServlet")
+public class MockSolicitudCompraServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	@EJB
 	IDepositoControladorLocal controlador;
 	
-	static Logger log = Logger.getLogger(PruebaServlet.class.getName());
+	static Logger log = Logger.getLogger(MockSolicitudCompraServlet.class.getName());
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PruebaServlet() {
+    public MockSolicitudCompraServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

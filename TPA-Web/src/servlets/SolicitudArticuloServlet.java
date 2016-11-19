@@ -15,15 +15,15 @@ import serviceREST.SolicitudArticuloClient;
 import controler.IDepositoControladorLocal;
 import controler.IEntregaArticuloControladorLocal;
 
-@WebServlet("/EntregaArticuloServlet")
-public class EntregaArticuloServlet extends HttpServlet  {
+@WebServlet("/SolicitudArticuloServlet")
+public class SolicitudArticuloServlet extends HttpServlet  {
 	
 	@EJB
 	IEntregaArticuloControladorLocal depositoEntregaArticulo;
 
 	private static final long serialVersionUID = 1L;
 	
-    public EntregaArticuloServlet() {
+    public SolicitudArticuloServlet() {
     	
     }
 
@@ -199,7 +199,7 @@ public class EntregaArticuloServlet extends HttpServlet  {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 	
 	

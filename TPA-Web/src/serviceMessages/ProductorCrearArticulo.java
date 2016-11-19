@@ -10,19 +10,19 @@ import dto.ArticuloDTO;
 
 public class ProductorCrearArticulo extends ClienteMensajeria{
 
-	String host = "192.168.0.100";
-	String port = "8080";
-	String queueName ="jms/queue/eventoAuditoria";
-	String user = "guest";
-	String pass = "guest";
+	private String host = "192.168.0.100";
+	private String port = "8080";
+	private String queueName ="jms/queue/eventoAuditoria";
+	private String user = "guest";
+	private String pass = "guest";
 	
 	public void sendMessageLogistica(ArticuloDTO articuloDto) {
 		
-		String host = "192.168.0.100";
-		String port = "8080";
-		String queueName ="jms/queue/eventoAuditoria";
-		String user = "guest";
-		String pass = "guest";
+		host = "192.168.0.100";
+		port = "8080";
+		queueName ="jms/queue/eventoAuditoria";
+		user = "guest";
+		pass = "guest";
 		
 		
 		this.setProviderUrl(host +":"+port);
