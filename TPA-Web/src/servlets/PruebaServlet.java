@@ -59,7 +59,7 @@ public class PruebaServlet extends HttpServlet {
 		
 		SolicitudCompraDTO solicitudCompraDTO = new SolicitudCompraDTO();
 //		solicitudCompraDTO.setCodigo(1);
-		solicitudCompraDTO.setCodigo("1");
+		solicitudCompraDTO.setCodArticulo("1");
 		solicitudCompraDTO.setPendiente("pendiente");
 		solicitudCompraDTO.setSolicitudesArticulos(solicitudesArticulo);
 		ItemSolicitudCompraDTO itemSolicitudCompraDTO = new ItemSolicitudCompraDTO();

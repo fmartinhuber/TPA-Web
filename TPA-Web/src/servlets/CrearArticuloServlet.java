@@ -100,8 +100,10 @@ public class CrearArticuloServlet extends HttpServlet {
 		// Enviarlo por REST
 		//CrearArticuloJAXRSClient.conexion(articuloDto);
 		CrearArticuloClient.conexion(newArticulo);
-//		ProductorCrearArticulo asd = new ProductorCrearArticulo();
-//		asd.sendMessage(newArticulo);
+		ProductorCrearArticulo asd = new ProductorCrearArticulo();
+		asd.sendMessageLogistica(newArticulo);
+		asd.sendMessageDespacho(newArticulo);
+		asd.sendMessagePortal(newArticulo);
 	}
 
 }
