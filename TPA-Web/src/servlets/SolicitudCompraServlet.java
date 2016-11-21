@@ -45,17 +45,19 @@ public class SolicitudCompraServlet extends HttpServlet {
 			List<SolicitudArticuloDTO> solisArtDto = new ArrayList<SolicitudArticuloDTO>();
 			solisArtDto = depositoEntregaArticulo.listarSolicitudesPendientes();
 			
-			//Formateo la salida parseando columnas con ";" y filas con "-?"
-			String respuesta = "";
-			for (SolicitudArticuloDTO s : solisArtDto){
-				respuesta += s.getCodigo() + ";" + s.getFechaEntrega() + "-?";
+			if(solisArtDto != null){
+				//Formateo la salida parseando columnas con ";" y filas con "-?"
+				String respuesta = "";
+				for (SolicitudArticuloDTO s : solisArtDto){
+					respuesta += s.getCodigo() + ";" + s.getFechaEntrega() + "-?";
+				}
+				//Cortamos el "-?" final y enviamos la respuesta
+				respuesta = respuesta.substring(0, respuesta.length()-2);
+				response.getWriter().write(respuesta);
+				
+				//Como se accede a este metodo al momento de abrir la pagina, blanqueamos el vector acumulado
+				cadenaStringSalida.clear();
 			}
-			//Cortamos el "-?" final y enviamos la respuesta
-			respuesta = respuesta.substring(0, respuesta.length()-2);
-			response.getWriter().write(respuesta);
-			
-			//Como se accede a este metodo al momento de abrir la pagina, blanqueamos el vector acumulado
-			cadenaStringSalida.clear();
 		}
 		
 		
